@@ -8,7 +8,7 @@ public class WnsBadgeBuilder {
 	}
 	
 	/**
-	 * @param value should be between 1-99
+	 * @param value should be between 0-99. Values greater than 99 will be shown as 99+
 	 */
 	public WnsBadgeBuilder value(Integer value) {
 		this.badge.value = String.valueOf(value);

@@ -3,6 +3,7 @@ package ar.com.fernandospr.wns;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
+import ar.com.fernandospr.wns.model.WnsBadge;
 import ar.com.fernandospr.wns.model.types.WnsNotificationType;
 
 import com.sun.jersey.api.client.Client;
@@ -88,32 +89,29 @@ public class WnsService {
 		this.push(pushUri, WnsNotificationType.TOAST, toastXmlString);
 	}
 	
-	public void pushBadge(String pushUri, int badgeValue) {
-		String badgeXmlString = "<?xml version='1.0' encoding='utf-8'?>" +
-								"<badge value=\"" + badgeValue + "\"/>";
-		
-		this.push(pushUri, WnsNotificationType.BADGE, badgeXmlString);
+	public void pushBadge(String pushUri, WnsBadge badge) {
+		this.push(pushUri, WnsNotificationType.BADGE, badge);
 	}
 	
 	protected void push(String pushUri, String type, String notificationData) {
-		this.push(pushUri, this.token.access_token, type, notificationData);
+		this.push(pushUri, type, notificationData);
 	}
-	
-	protected void push(String pushUri, String accessToken, String type, String notificationData) {
+		
+	protected void push(String pushUri, String type, Object notificationData) {
 		try {			
 			Client client = createClient();
 			WebResource webResource = client.resource(pushUri);
 			
 			ClientResponse response = webResource.type(MediaType.TEXT_XML)
 												 .header("X-WNS-Type", type)
-												 .header("Authorization", "Bearer " + accessToken)
+												 .header("Authorization", "Bearer " + this.token.access_token)
 												 .post(ClientResponse.class, notificationData);
 			if (response.getStatus() != 200) {
 				if (response.getStatus() == 401) {
 					// Access token may have expired
 					this.token = getAccessToken(this.clientSecret, this.sid);
 					// Retry
-					this.push(pushUri, this.token.access_token, type, notificationData);
+					this.push(pushUri, type, notificationData);
 					
 					// TODO: implement retry policy 
 				} else {

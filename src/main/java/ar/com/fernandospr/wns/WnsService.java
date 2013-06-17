@@ -8,7 +8,10 @@ import ar.com.fernandospr.wns.model.types.WnsNotificationType;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.LoggingFilter;
+import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 
@@ -25,11 +28,18 @@ public class WnsService {
 		this.token = getAccessToken(this.clientSecret, this.sid);
 	}
 	
+	private static Client createClient() {
+		ClientConfig clientConfig = new DefaultClientConfig();
+		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+		Client client = Client.create(clientConfig);
+		client.addFilter(new LoggingFilter(System.out));
+		return client;
+	}
+	
 	protected WnsOAuthToken getAccessToken(String secret, String sid)
 	{
 		try {			
-			Client client = Client.create();
-			client.addFilter(new LoggingFilter(System.out));
+			Client client = createClient();
 			WebResource webResource = client.resource(AUTHENTICATION_URI);
 			MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
 			formData.add("grant_type", "client_credentials");
@@ -91,8 +101,7 @@ public class WnsService {
 	
 	protected void push(String pushUri, String accessToken, String type, String notificationData) {
 		try {			
-			Client client = Client.create();
-			client.addFilter(new LoggingFilter(System.out));
+			Client client = createClient();
 			WebResource webResource = client.resource(pushUri);
 			
 			ClientResponse response = webResource.type(MediaType.TEXT_XML)

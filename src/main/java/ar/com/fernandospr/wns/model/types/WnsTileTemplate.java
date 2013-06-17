@@ -10,10 +10,7 @@ public final class WnsTileTemplate {
 		public static final String TILESQUARETEXT04 = "TileSquareText04";
 	}
 	public static final class SquareImageOnly {
-		public static final String TILESQUAREPEEKIMAGEANDTEXT01 = "TileSquarePeekImageAndText01";
-		public static final String TILESQUAREPEEKIMAGEANDTEXT02 = "TileSquarePeekImageAndText02";
-		public static final String TILESQUAREPEEKIMAGEANDTEXT03 = "TileSquarePeekImageAndText03";
-		public static final String TILESQUAREPEEKIMAGEANDTEXT04 = "TileSquarePeekImageAndText04";
+		public static final String TILESQUAREIMAGE = "TileSquareImage";
 	}
 	public static final class SquarePeek {
 		public static final String TILESQUAREPEEKIMAGEANDTEXT01 = "TileSquarePeekImageAndText01";

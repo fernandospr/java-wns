@@ -31,6 +31,8 @@ public class WnsService {
 	private WnsOAuthToken token;
 	private Client client;
 	
+	private int retryPolicy = 5; // By default retry 5 times
+	
 	/**
 	 * @param sid
 	 * @param clientSecret
@@ -82,7 +84,7 @@ public class WnsService {
 	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
 	public WnsNotificationResponse pushTile(String channelUri, WnsTile tile) throws WnsException {
-		return this.push(channelUri, WnsNotificationType.TILE, tile);
+		return this.push(channelUri, WnsNotificationType.TILE, tile, this.retryPolicy);
 	}
 	
 	/**
@@ -93,7 +95,7 @@ public class WnsService {
 	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
 	public WnsNotificationResponse pushToast(String channelUri, WnsToast toast) throws WnsException {
-		return this.push(channelUri, WnsNotificationType.TOAST, toast);
+		return this.push(channelUri, WnsNotificationType.TOAST, toast, this.retryPolicy);
 	}
 	
 	/**
@@ -104,7 +106,7 @@ public class WnsService {
 	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
 	public WnsNotificationResponse pushBadge(String channelUri, WnsBadge badge) throws WnsException {
-		return this.push(channelUri, WnsNotificationType.BADGE, badge);
+		return this.push(channelUri, WnsNotificationType.BADGE, badge, this.retryPolicy);
 	}
 		
 	// TODO: add push methods with optional request parameters from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_request
@@ -115,10 +117,11 @@ public class WnsService {
 	 * @param channelUri
 	 * @param type should be any of {@link ar.com.fernandospr.wns.model.types.WnsNotificationType}
 	 * @param notification
+	 * @param retriesLeft to push the notification if the token expires
 	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
-	protected WnsNotificationResponse push(String channelUri, String type, WnsAbstractNotification notification) throws WnsException {
+	protected WnsNotificationResponse push(String channelUri, String type, WnsAbstractNotification notification, int retriesLeft) throws WnsException {
 		WebResource webResource = this.client.resource(channelUri);
 		ClientResponse response = webResource.type(MediaType.TEXT_XML)
 											 .header("X-WNS-Type", type)
@@ -129,15 +132,14 @@ public class WnsService {
 			return notificationResponse;
 		}
 		
-		if (notificationResponse.code == 401) {
+		if (notificationResponse.code == 401 && retriesLeft > 0) {
+			retriesLeft--;
 			// Access token may have expired
 			this.token = getAccessToken();
 			// Retry
-			return this.push(channelUri, type, notification);
-			
-			// TODO: implement retry policy 
-		} else {
-			throw new WnsException("Push failed. HTTP error code: " + response.getStatus());
+			return this.push(channelUri, type, notification, retriesLeft);
 		}
+			
+		throw new WnsException("Push failed. HTTP error code: " + response.getStatus());
 	}
 }

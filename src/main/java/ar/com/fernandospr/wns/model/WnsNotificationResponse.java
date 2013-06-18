@@ -9,9 +9,19 @@ public class WnsNotificationResponse {
 	public final int code;
 	
 	public final String debugTrace;
+	
+	/**
+	 * Should be any of {@link ar.com.fernandospr.wns.model.types.WnsDeviceConnectionStatusType}
+	 */
 	public final String deviceConnectionStatus;
+	
 	public final String errorDescription;
+	
 	public final String msgID;
+	
+	/**
+	 * Should be any of {@link ar.com.fernandospr.wns.model.types.WnsNotificationStatusType}
+	 */
 	public final String notificationStatus;
 	
 	public WnsNotificationResponse(int responseCode, MultivaluedMap<String, String> headers) {

@@ -1,6 +1,8 @@
 package ar.com.fernandospr.wns.model.types;
 
-// From http://msdn.microsoft.com/en-us/library/windows/apps/br212849.aspx
+/**
+ * From http://msdn.microsoft.com/en-us/library/windows/apps/br212849.aspx
+ */
 public final class WnsBadgeType {
 	public static final String NONE = "none";
 	public static final String ACTIVITY = "activity";

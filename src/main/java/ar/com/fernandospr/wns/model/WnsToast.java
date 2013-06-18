@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 // http://msdn.microsoft.com/en-us/library/windows/apps/br230846.aspx
 
 @XmlRootElement(name = "toast")
-public class WnsToast {
+public class WnsToast extends WnsAbstractNotification {
 	
 	@XmlAttribute
 	public String launch;

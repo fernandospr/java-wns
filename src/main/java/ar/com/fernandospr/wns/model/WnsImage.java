@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 // http://msdn.microsoft.com/en-us/library/windows/apps/br230844.aspx
 
 @XmlRootElement(name = "image")
-class WnsImage {
+public class WnsImage {
 	
 	@XmlAttribute
 	public Integer id;

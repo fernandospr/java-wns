@@ -32,7 +32,7 @@ public class WnsService {
 	/**
 	 * @param sid
 	 * @param clientSecret
-	 * @throws WnsException
+	 * @throws WnsException when authentication fails
 	 */
 	public WnsService(String sid, String clientSecret) throws WnsException {
 		this.sid = sid;
@@ -50,7 +50,7 @@ public class WnsService {
 	
 	/**
 	 * Based on http://msdn.microsoft.com/en-us/library/windows/apps/hh465407.aspx
-	 * @throws WnsException
+	 * @throws WnsException when authentication fails
 	 */
 	protected WnsOAuthToken getAccessToken() throws WnsException {
 		Client client = createClient();

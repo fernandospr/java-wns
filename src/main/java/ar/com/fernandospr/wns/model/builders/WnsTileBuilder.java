@@ -1,21 +1,23 @@
 package ar.com.fernandospr.wns.model.builders;
 
-import java.util.ArrayList;
-
 import ar.com.fernandospr.wns.model.WnsBinding;
-import ar.com.fernandospr.wns.model.WnsImage;
-import ar.com.fernandospr.wns.model.WnsText;
 import ar.com.fernandospr.wns.model.WnsTile;
 import ar.com.fernandospr.wns.model.WnsVisual;
 import ar.com.fernandospr.wns.model.types.WnsTileTemplate;
 
-public class WnsTileBuilder {
+public class WnsTileBuilder extends WnsAbstractBuilder<WnsTileBuilder> {
 	private WnsTile tile;
 	
 	public WnsTileBuilder() {
 		this.tile = new WnsTile();
 	}
 	
+	@Override
+	public WnsTileBuilder getThis() {
+		return this;
+	}
+	
+	@Override
 	protected WnsVisual getVisual() {
 		if (this.tile.visual == null) {
 			this.tile.visual = new WnsVisual();
@@ -23,77 +25,12 @@ public class WnsTileBuilder {
 		return this.tile.visual;
 	}
 	
+	@Override
 	protected WnsBinding getBinding() {
 		if (getVisual().binding == null) {
 			getVisual().binding = new WnsBinding();
 		}
 		return this.tile.visual.binding;
-	}
-	
-	public WnsTileBuilder visualVersion(Integer version) {
-		getVisual().version = version;
-		return this;
-	}
-	
-	public WnsTileBuilder visualLang(String lang) {
-		getVisual().lang = lang;
-		return this;
-	}
-	
-	public WnsTileBuilder visualBaseUri(String baseUri) {
-		getVisual().baseUri = baseUri;
-		return this;
-	}
-
-	/**
-	 * @param template should be any of {@link ar.com.fernandospr.wns.model.types.WnsBrandingType}
-	 */
-	public WnsTileBuilder visualBranding(String branding) {
-		getVisual().branding = branding;
-		return this;
-	}
-	
-	public WnsTileBuilder visualAddImageQuery(Boolean addImageQuery) {
-		getVisual().addImageQuery = addImageQuery;
-		return this;
-	}
-	
-	public WnsTileBuilder bindingFallback(String fallback) {
-		getBinding().fallback = fallback;
-		return this;
-	}
-	
-	public WnsTileBuilder bindingLang(String lang) {
-		getBinding().lang = lang;
-		return this;
-	}
-	
-	public WnsTileBuilder bindingBaseUri(String baseUri) {
-		getBinding().baseUri = baseUri;
-		return this;
-	}
-	
-	/**
-	 * @param template should be any of {@link ar.com.fernandospr.wns.model.types.WnsBrandingType}
-	 */
-	public WnsTileBuilder bindingBranding(String branding) {
-		getBinding().branding = branding;
-		return this;
-	}
-
-	public WnsTileBuilder bindingAddImageQuery(Boolean addImageQuery) {
-		getBinding().addImageQuery = addImageQuery;
-		return this;
-	}
-	
-	/**
-	 * @param template should be any of {@link ar.com.fernandospr.wns.model.types.WnsTileTemplate}
-	 */
-	protected WnsTileBuilder bindingTemplate(String template) {
-		getBinding().template = template;
-		getBinding().texts = null;
-		getBinding().images = null;
-		return this;
 	}
 		
 	public WnsTileBuilder bindingTemplateTileSquareBlock(String textField1, String textField2) {
@@ -351,29 +288,7 @@ public class WnsTileBuilder {
 				.setBindingTextFields(textField1)
 				.setBindingImages(imgSrc1, imgSrc2);
 	}
-	
-	protected WnsTileBuilder setBindingTextFields(String ... textFields) {
-		getBinding().texts = new ArrayList<WnsText>();
-		for (int i = 0; i < textFields.length; i++) {
-			WnsText txt = new WnsText();
-			txt.id = i+1;
-			txt.value = textFields[i] != null ? textFields[i] : "";
-			getBinding().texts.add(txt);
-		}
-		return this;
-	}
-	
-	protected WnsTileBuilder setBindingImages(String ... imgSrcs) {
-		getBinding().images = new ArrayList<WnsImage>();
-		for (int i = 0; i < imgSrcs.length; i++) {
-			WnsImage img = new WnsImage();
-			img.id = i+1;
-			img.src = imgSrcs[i] != null ? imgSrcs[i] : "";
-			getBinding().images.add(img);
-		}
-		return this;
-	}
-		
+			
 	public WnsTile build() {
 		return this.tile;
 	}

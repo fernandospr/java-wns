@@ -4,6 +4,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
 import ar.com.fernandospr.wns.model.WnsBadge;
+import ar.com.fernandospr.wns.model.WnsTile;
+import ar.com.fernandospr.wns.model.WnsToast;
 import ar.com.fernandospr.wns.model.types.WnsNotificationType;
 
 import com.sun.jersey.api.client.Client;
@@ -60,33 +62,12 @@ public class WnsService {
 		}
 	}
 	
-	public void pushTile(String pushUri, String tileText1, String tileText2) {
-		String tileTemplate = "TileSquareBlock";
-		String tileXmlString = "<?xml version='1.0' encoding='utf-8'?>" +
-							   "<tile>" +
-									"<visual>" +
-										"<binding template=\""+ tileTemplate +"\">" +
-											"<text id=\"1\">" + tileText1 + "</text>" +
-											"<text id=\"2\">" + tileText2 + "</text>" +
-										"</binding>" +
-									"</visual>" +
-							   "</tile>";
-		
-		this.push(pushUri, WnsNotificationType.TILE, tileXmlString);
+	public void pushTile(String pushUri, WnsTile tile) {
+		this.push(pushUri, WnsNotificationType.TILE, tile);
 	}
 	
-	public void pushToast(String pushUri, String toastText) {
-		String toastTemplate = "ToastText01";
-		String toastXmlString = "<?xml version='1.0' encoding='utf-8'?>" +
-								"<toast>" +
-									"<visual>" +
-										"<binding template=\"" + toastTemplate + "\">" +
-											"<text id=\"1\">" + toastText + "</text>" +
-										"</binding>" +
-									"</visual>" +
-								"</toast>";
-		
-		this.push(pushUri, WnsNotificationType.TOAST, toastXmlString);
+	public void pushToast(String pushUri, WnsToast toast) {
+		this.push(pushUri, WnsNotificationType.TOAST, toast);
 	}
 	
 	public void pushBadge(String pushUri, WnsBadge badge) {

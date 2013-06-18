@@ -4,7 +4,7 @@
 	<groupId>ar.com.fernandospr.wns</groupId>
 	<artifactId>java-wns</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>java-wns</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>

@@ -73,7 +73,7 @@ public class WnsService {
 	/**
 	 * Pushes a tile to channelUri
 	 * @param channelUri
-	 * @param tile
+	 * @param tile which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsTileBuilder}
 	 * @throws WnsException please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
 	public void pushTile(String channelUri, WnsTile tile) throws WnsException {
@@ -83,7 +83,7 @@ public class WnsService {
 	/**
 	 * Pushes a toast to channelUri
 	 * @param channelUri
-	 * @param toast
+	 * @param toast which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsToastBuilder}
 	 * @throws WnsException please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
 	public void pushToast(String channelUri, WnsToast toast) throws WnsException {
@@ -93,13 +93,19 @@ public class WnsService {
 	/**
 	 * Pushes a badge to channelUri
 	 * @param channelUri
-	 * @param badge
+	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
 	 * @throws WnsException please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
 	public void pushBadge(String channelUri, WnsBadge badge) throws WnsException {
 		this.push(channelUri, WnsNotificationType.BADGE, badge);
 	}
 		
+	// TODO: add push methods with optional request parameters from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_request
+	
+	// TODO: return object from push methods, http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	
+	// TODO: add description of response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	
 	/**
 	 * @param channelUri
 	 * @param type should be any of {@link ar.com.fernandospr.wns.model.types.WnsNotificationType}

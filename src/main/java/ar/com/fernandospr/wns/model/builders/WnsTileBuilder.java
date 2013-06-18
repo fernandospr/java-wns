@@ -1,7 +1,12 @@
-package ar.com.fernandospr.wns.model;
+package ar.com.fernandospr.wns.model.builders;
 
 import java.util.ArrayList;
 
+import ar.com.fernandospr.wns.model.WnsBinding;
+import ar.com.fernandospr.wns.model.WnsImage;
+import ar.com.fernandospr.wns.model.WnsText;
+import ar.com.fernandospr.wns.model.WnsTile;
+import ar.com.fernandospr.wns.model.WnsVisual;
 import ar.com.fernandospr.wns.model.types.WnsTileTemplate;
 
 public class WnsTileBuilder {
@@ -40,6 +45,9 @@ public class WnsTileBuilder {
 		return this;
 	}
 
+	/**
+	 * @param template should be any of {@link ar.com.fernandospr.wns.model.types.WnsBrandingType}
+	 */
 	public WnsTileBuilder visualBranding(String branding) {
 		getVisual().branding = branding;
 		return this;
@@ -65,6 +73,9 @@ public class WnsTileBuilder {
 		return this;
 	}
 	
+	/**
+	 * @param template should be any of {@link ar.com.fernandospr.wns.model.types.WnsBrandingType}
+	 */
 	public WnsTileBuilder bindingBranding(String branding) {
 		getBinding().branding = branding;
 		return this;

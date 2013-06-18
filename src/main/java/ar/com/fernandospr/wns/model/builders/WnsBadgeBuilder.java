@@ -1,4 +1,6 @@
-package ar.com.fernandospr.wns.model;
+package ar.com.fernandospr.wns.model.builders;
+
+import ar.com.fernandospr.wns.model.WnsBadge;
 
 public class WnsBadgeBuilder {
 	private WnsBadge badge;

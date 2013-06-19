@@ -6,6 +6,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import ar.com.fernandospr.wns.exceptions.WnsException;
 import ar.com.fernandospr.wns.model.WnsAbstractNotification;
 import ar.com.fernandospr.wns.model.WnsBadge;
+import ar.com.fernandospr.wns.model.WnsNotificationRequestOptional;
 import ar.com.fernandospr.wns.model.WnsNotificationResponse;
 import ar.com.fernandospr.wns.model.WnsOAuthToken;
 import ar.com.fernandospr.wns.model.WnsTile;
@@ -84,7 +85,19 @@ public class WnsService {
 	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
 	public WnsNotificationResponse pushTile(String channelUri, WnsTile tile) throws WnsException {
-		return this.push(channelUri, WnsNotificationType.TILE, tile, this.retryPolicy);
+		return this.pushTile(channelUri, null, tile);
+	}
+	
+	/**
+	 * Pushes a tile to channelUri using optional headers
+	 * @param channelUri
+	 * @param optional
+	 * @param tile which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsTileBuilder}
+	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 */
+	public WnsNotificationResponse pushTile(String channelUri, WnsNotificationRequestOptional optional, WnsTile tile) throws WnsException {
+		return this.push(channelUri, WnsNotificationType.TILE, tile, this.retryPolicy, optional);
 	}
 	
 	/**
@@ -95,7 +108,19 @@ public class WnsService {
 	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
 	public WnsNotificationResponse pushToast(String channelUri, WnsToast toast) throws WnsException {
-		return this.push(channelUri, WnsNotificationType.TOAST, toast, this.retryPolicy);
+		return this.pushToast(channelUri, null, toast);
+	}
+	
+	/**
+	 * Pushes a toast to channelUri using optional headers
+	 * @param channelUri
+	 * @param optional
+	 * @param toast which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsToastBuilder}
+	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 */
+	public WnsNotificationResponse pushToast(String channelUri, WnsNotificationRequestOptional optional, WnsToast toast) throws WnsException {
+		return this.push(channelUri, WnsNotificationType.TOAST, toast, this.retryPolicy, optional);
 	}
 	
 	/**
@@ -106,12 +131,20 @@ public class WnsService {
 	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
 	public WnsNotificationResponse pushBadge(String channelUri, WnsBadge badge) throws WnsException {
-		return this.push(channelUri, WnsNotificationType.BADGE, badge, this.retryPolicy);
+		return this.pushBadge(channelUri, null, badge);
 	}
-		
-	// TODO: add push methods with optional request parameters from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_request
-	
-	// TODO: add description of response codes to WnsException from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+
+	/**
+	 * Pushes a badge to channelUri using optional headers
+	 * @param channelUri
+	 * @param optional
+	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
+	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 */
+	public WnsNotificationResponse pushBadge(String channelUri, WnsNotificationRequestOptional optional, WnsBadge badge) throws WnsException {
+		return this.push(channelUri, WnsNotificationType.BADGE, badge, this.retryPolicy, optional);
+	}
 	
 	/**
 	 * @param channelUri
@@ -121,12 +154,15 @@ public class WnsService {
 	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 * @throws WnsException if it was unable to push the notification, please see response codes from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 	 */
-	protected WnsNotificationResponse push(String channelUri, String type, WnsAbstractNotification notification, int retriesLeft) throws WnsException {
+	protected WnsNotificationResponse push(String channelUri, String type, WnsAbstractNotification notification, int retriesLeft, WnsNotificationRequestOptional optional) throws WnsException {
 		WebResource webResource = this.client.resource(channelUri);
-		ClientResponse response = webResource.type(MediaType.TEXT_XML)
-											 .header("X-WNS-Type", type)
-											 .header("Authorization", "Bearer " + this.token.access_token)
-											 .post(ClientResponse.class, notification);
+		webResource.type(MediaType.TEXT_XML);
+		
+		setRequiredHeaders(webResource, type, this.token.access_token);
+		setOptionalHeaders(webResource, optional);
+		
+		ClientResponse response = webResource.post(ClientResponse.class, notification);
+		
 		WnsNotificationResponse notificationResponse = new WnsNotificationResponse(response.getStatus(), response.getHeaders());
 		if (notificationResponse.code == 200) {
 			return notificationResponse;
@@ -137,9 +173,36 @@ public class WnsService {
 			// Access token may have expired
 			this.token = getAccessToken();
 			// Retry
-			return this.push(channelUri, type, notification, retriesLeft);
+			return this.push(channelUri, type, notification, retriesLeft, optional);
 		}
-			
+		
+		// TODO: add description of response codes to WnsException from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
 		throw new WnsException("Push failed. HTTP error code: " + response.getStatus());
+	}
+
+	protected void setOptionalHeaders(WebResource webResource, WnsNotificationRequestOptional optional) {
+		if (optional != null) {
+			if (!emptyString(optional.cachePolicy)) {
+				webResource.header("X-WNS-Cache-Policy", optional.cachePolicy);
+			}
+			if (!emptyString(optional.requestForStatus)) {
+				webResource.header("X-WNS-RequestForStatus", optional.requestForStatus);
+			}
+			if (!emptyString(optional.tag)) {
+				webResource.header("X-WNS-Tag", optional.tag);
+			}
+			if (!emptyString(optional.ttl)) {
+				webResource.header("X-WNS-TTL", optional.ttl);
+			}
+		}
+	}
+
+	protected void setRequiredHeaders(WebResource webResource, String type, String accessToken) {
+		 webResource.header("X-WNS-Type", type)
+		 			.header("Authorization", "Bearer " + accessToken);
+	}
+	
+	private boolean emptyString(String str) {
+		return str == null || str.isEmpty();
 	}
 }

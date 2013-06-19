@@ -61,7 +61,9 @@ public class WnsService {
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 		Client client = Client.create(clientConfig);
-		client.addFilter(new LoggingFilter(System.out));
+		if (logging == true) {
+			client.addFilter(new LoggingFilter(System.out));
+		}
 		return client;
 	}
 	

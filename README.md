@@ -115,6 +115,16 @@ bindingTemplateXXX()
 Please check the Toast and Tile templates in the Links section to use the one you need.
 
 
+## Response headers
+The pushXXX methods of WnsService return an object of the WnsNotificationResponse type. 
+This object contains the values specified in the Headers (Send notification response section) in the Links section.
+
+
+## Request optional headers
+There are pushXXX methods implementations that receive an object of the WnsNotificationRequestOptional type.
+You should create an object of this type and set the corresponding values, according to the Headers (Request parameters) in the Links Section.
+
+
 ## Links
 This library was built based on the following Microsoft documentation:
 
@@ -129,3 +139,5 @@ This library was built based on the following Microsoft documentation:
 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761492.aspx">Toast audio options</a>
 
 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx">Tile templates</a>
+
+<a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx">Headers</a>

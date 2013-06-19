@@ -16,6 +16,7 @@ import ar.com.fernandospr.wns.model.types.WnsNotificationType;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.LoggingFilter;
@@ -40,15 +41,23 @@ public class WnsService {
 	 * @throws WnsException when authentication fails
 	 */
 	public WnsService(String sid, String clientSecret) throws WnsException {
+		this(sid,clientSecret, false);
+	}
+	
+	/**
+	 * @param sid
+	 * @param clientSecret
+	 * @param logging true if System.out logging is needed
+	 * @throws WnsException when authentication fails
+	 */
+	public WnsService(String sid, String clientSecret, boolean logging) throws WnsException {
 		this.sid = sid;
 		this.clientSecret = clientSecret;
-		this.client = createClient();
+		this.client = createClient(logging);
 		this.token = getAccessToken();
 	}
 	
-	// TODO: optional logging
-	
-	private static Client createClient() {
+	private static Client createClient(boolean logging) {
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 		Client client = Client.create(clientConfig);
@@ -156,12 +165,12 @@ public class WnsService {
 	 */
 	protected WnsNotificationResponse push(String channelUri, String type, WnsAbstractNotification notification, int retriesLeft, WnsNotificationRequestOptional optional) throws WnsException {
 		WebResource webResource = this.client.resource(channelUri);
-		webResource.type(MediaType.TEXT_XML);
 		
-		setRequiredHeaders(webResource, type, this.token.access_token);
-		setOptionalHeaders(webResource, optional);
+		Builder webResourceBuilder = webResource.type(MediaType.TEXT_XML);
+		addRequiredHeaders(webResourceBuilder, type, this.token.access_token);
+		addOptionalHeaders(webResourceBuilder, optional);
 		
-		ClientResponse response = webResource.post(ClientResponse.class, notification);
+		ClientResponse response = webResourceBuilder.post(ClientResponse.class, notification);
 		
 		WnsNotificationResponse notificationResponse = new WnsNotificationResponse(response.getStatus(), response.getHeaders());
 		if (notificationResponse.code == 200) {
@@ -180,26 +189,26 @@ public class WnsService {
 		throw new WnsException("Push failed. HTTP error code: " + response.getStatus());
 	}
 
-	protected void setOptionalHeaders(WebResource webResource, WnsNotificationRequestOptional optional) {
+	protected void addOptionalHeaders(Builder webResourceBuilder, WnsNotificationRequestOptional optional) {
 		if (optional != null) {
 			if (!emptyString(optional.cachePolicy)) {
-				webResource.header("X-WNS-Cache-Policy", optional.cachePolicy);
+				webResourceBuilder.header("X-WNS-Cache-Policy", optional.cachePolicy);
 			}
 			if (!emptyString(optional.requestForStatus)) {
-				webResource.header("X-WNS-RequestForStatus", optional.requestForStatus);
+				webResourceBuilder.header("X-WNS-RequestForStatus", optional.requestForStatus);
 			}
 			if (!emptyString(optional.tag)) {
-				webResource.header("X-WNS-Tag", optional.tag);
+				webResourceBuilder.header("X-WNS-Tag", optional.tag);
 			}
 			if (!emptyString(optional.ttl)) {
-				webResource.header("X-WNS-TTL", optional.ttl);
+				webResourceBuilder.header("X-WNS-TTL", optional.ttl);
 			}
 		}
 	}
 
-	protected void setRequiredHeaders(WebResource webResource, String type, String accessToken) {
-		 webResource.header("X-WNS-Type", type)
-		 			.header("Authorization", "Bearer " + accessToken);
+	protected void addRequiredHeaders(Builder webResourceBuilder, String type, String accessToken) {
+		 webResourceBuilder.header("X-WNS-Type", type)
+		 				   .header("Authorization", "Bearer " + accessToken);
 	}
 	
 	private boolean emptyString(String str) {

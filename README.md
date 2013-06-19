@@ -100,6 +100,21 @@ WnsToast toast =  new WnsToastBuilder.bindingTemplateToastText01("Hello world").
 service.pushToast(channelUri, toast);
 ```
 
+
+## Notification builders
+To create and customize notifications, you should use the following builders:
+
+* WnsBadgeBuilder
+* WnsToastBuilder
+* WnsTileBuilder
+
+WnsToastBuilder and WnsTileBuilder have methods with the following signature:
+```
+bindingTemplateXXX()
+```
+Please check the Toast and Tile templates in the Links section to use the one you need.
+
+
 ## Links
 This library was built based on the following Microsoft documentation:
 

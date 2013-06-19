@@ -28,7 +28,7 @@ public abstract class WnsAbstractBuilder<T extends WnsAbstractBuilder<T>> {
 	}
 
 	/**
-	 * @param template should be any of {@link ar.com.fernandospr.wns.model.types.WnsBrandingType}
+	 * @param branding should be any of {@link ar.com.fernandospr.wns.model.types.WnsBrandingType}
 	 */
 	public T visualBranding(String branding) {
 		getVisual().branding = branding;
@@ -56,7 +56,7 @@ public abstract class WnsAbstractBuilder<T extends WnsAbstractBuilder<T>> {
 	}
 	
 	/**
-	 * @param template should be any of {@link ar.com.fernandospr.wns.model.types.WnsBrandingType}
+	 * @param branding should be any of {@link ar.com.fernandospr.wns.model.types.WnsBrandingType}
 	 */
 	public T bindingBranding(String branding) {
 		getBinding().branding = branding;

@@ -8,9 +8,9 @@ This library will let you implement the Cloud Service of the diagram below:
 
 
 ## Steps
-First, you will need to register your Windows application in the store.
+First, you will need to register your Windows application in the store to get a SID (Package security identifier) and Client Secret codes.
 
-Second, obtain the channel uri of your devices.
+Second, obtain the Channel URI of your devices.
 
 Third, use this library to authenticate with WNS and send the notifications!
 
@@ -26,11 +26,11 @@ If you want your devices to receive Toast notifications, you should also change 
 
 Go to Services>Push notifications and Live Connect services info and below "If your app uses WNS for push notifications, review", select Authenticating yor service.
 
-Save the SID (Package security identifier) and client secret, example screenshot below:
+Save the SID (Package security identifier) and Client Secret, example screenshot below:
 <img src="http://i.msdn.microsoft.com/dynimg/IC582761.png"/>
 
 
-### Second step - Obtain channel uri
+### Second step - Obtain Channel URI
 
 Add the following code to your Windows app:
 
@@ -120,7 +120,7 @@ The pushXXX methods of WnsService return an object of the WnsNotificationRespons
 This object contains the values specified in the Headers (Send notification response section) in the Links section.
 
 
-## Request optional headers
+## Request optional headers
 There are pushXXX methods implementations that receive an object of the WnsNotificationRequestOptional type.
 You should create an object of this type and set the corresponding values, according to the Headers (Request parameters) in the Links Section.
 

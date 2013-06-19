@@ -6,7 +6,35 @@
 	<packaging>jar</packaging>
 	<version>1.0</version>
 	<name>java-wns</name>
-	<url>http://maven.apache.org</url>
+	<description>Library to send notifications using WNS</description>
+	<url>https://github.com/fernandospr/java-wns</url>
+	<licenses>
+		<license>
+			<name>New BSD License</name>
+			<url>http://www.opensource.org/licenses/bsd-license.php</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<!-- Inherit the Sonatype OSS deployment configuration -->
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
+	<scm>
+		<connection>scm:git:git@github.com:fernandospr/java-wns.git</connection>
+		<url>scm:git:git@github.com:fernandospr/java-wns.git</url>
+		<developerConnection>scm:git:git@github.com:fernandospr/java-wns.git</developerConnection>
+	</scm>
+	<developers>
+		<developer>
+			<id>fernandospr</id>
+			<name>Fernando Sproviero</name>
+		</developer>
+	</developers>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

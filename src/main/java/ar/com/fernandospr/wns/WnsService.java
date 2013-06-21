@@ -3,6 +3,8 @@ package ar.com.fernandospr.wns;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
+import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
+
 import ar.com.fernandospr.wns.exceptions.WnsException;
 import ar.com.fernandospr.wns.model.WnsAbstractNotification;
 import ar.com.fernandospr.wns.model.WnsBadge;
@@ -20,7 +22,6 @@ import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.LoggingFilter;
-import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 public class WnsService {
@@ -59,7 +60,7 @@ public class WnsService {
 	
 	private static Client createClient(boolean logging) {
 		ClientConfig clientConfig = new DefaultClientConfig();
-		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+		clientConfig.getClasses().add(MOXyJsonProvider.class);
 		Client client = Client.create(clientConfig);
 		if (logging == true) {
 			client.addFilter(new LoggingFilter(System.out));

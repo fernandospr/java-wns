@@ -3,7 +3,7 @@ package ar.com.fernandospr.wns;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
-import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import ar.com.fernandospr.wns.exceptions.WnsException;
 import ar.com.fernandospr.wns.model.WnsAbstractNotification;
@@ -60,7 +60,7 @@ public class WnsService {
 	
 	private static Client createClient(boolean logging) {
 		ClientConfig clientConfig = new DefaultClientConfig();
-		clientConfig.getClasses().add(MOXyJsonProvider.class);
+		clientConfig.getClasses().add(JacksonJsonProvider.class);
 		Client client = Client.create(clientConfig);
 		if (logging == true) {
 			client.addFilter(new LoggingFilter(System.out));

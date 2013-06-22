@@ -70,7 +70,7 @@ catch (Exception ex)
 ### Third step - Send notifications
 Now with your SID, Client Secret and Channel URI you are ready to send!
 
-Using this library, write the following to start the service:
+<a href="https://github.com/fernandospr/java-wns/wiki/Installation">Install this library</a> and write the following to start the service:
 
 ```
 boolean logging = true;

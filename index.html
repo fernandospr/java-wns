@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Java-wns : Java Service Provider to send push notifications to Windows 8 devices through WNS" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Java-wns</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/fernandospr/java-wns">View on GitHub</a>
+
+          <h1 id="project_title">Java-wns</h1>
+          <h2 id="project_tagline">Java Service Provider to send push notifications to Windows 8 devices through WNS</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/fernandospr/java-wns/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/fernandospr/java-wns/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>java-wns is a Java client for Windows Push Notification service (WNS).</p>
+
+<p>This library will let you implement the Cloud Service of the diagram below:</p>
+
+<p><img src="http://i.msdn.microsoft.com/dynimg/IC554245.png"></p>
+
+<h2>
+<a name="steps" class="anchor" href="#steps"><span class="octicon octicon-link"></span></a>Steps</h2>
+
+<p>First, you will need to register your Windows application in the store to get a SID (Package security identifier) and Client Secret codes.</p>
+
+<p>Second, obtain the Channel URI of your devices.</p>
+
+<p>Third, use this library to authenticate with WNS and send the notifications!</p>
+
+<h3>
+<a name="first-step---registration" class="anchor" href="#first-step---registration"><span class="octicon octicon-link"></span></a>First step - Registration</h3>
+
+<p>Go to the Windows Store app development page of the Windows Dev Center and sign in with your Microsoft account.</p>
+
+<p>Once you have signed in, select the Dashboard tab.</p>
+
+<p>On the Dashboard, submit your Windows app and update your package.appxmanifest with the corresponding identity values.</p>
+
+<p>If you want your devices to receive Toast notifications, you should also change "Toast capable" to YES in the manifest configuration.</p>
+
+<p>Go to Services&gt;Push notifications and Live Connect services info and below "If your app uses WNS for push notifications, review", select Authenticating yor service.</p>
+
+<p>Save the SID (Package security identifier) and Client Secret, example screenshot below:
+<img src="http://i.msdn.microsoft.com/dynimg/IC582761.png"></p>
+
+<h3>
+<a name="second-step---obtain-channel-uri" class="anchor" href="#second-step---obtain-channel-uri"><span class="octicon octicon-link"></span></a>Second step - Obtain Channel URI</h3>
+
+<p>Add the following code to your Windows app:</p>
+
+<p>Javascript:</p>
+
+<pre><code>var channel;
+var pushNotifications = Windows.Networking.PushNotifications;
+var channelOperation = pushNotifications.PushNotificationChannelManager.createPushNotificationChannelForApplicationAsync();
+
+return channelOperation.then(function (newChannel) {
+    channel = newChannel;
+    // Success. The channel URI is found in newChannel.uri.
+    },
+    function (error) {
+        // Could not create a channel. Retrieve the error through error.number.
+    }
+);
+</code></pre>
+
+<p>C#</p>
+
+<pre><code>PushNotificationChannel channel = null;
+
+try
+{
+    channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+    // Success. The channel URI is found in channel.uri.
+}
+
+catch (Exception ex)
+{ 
+    // Could not create a channel. 
+}
+</code></pre>
+
+<h3>
+<a name="third-step---send-notifications" class="anchor" href="#third-step---send-notifications"><span class="octicon octicon-link"></span></a>Third step - Send notifications</h3>
+
+<p>Now with your SID, Client Secret and Channel URI you are ready to send!</p>
+
+<p><a href="https://github.com/fernandospr/java-wns/wiki/Installation">Install this library</a> and write the following to start the service:</p>
+
+<pre><code>boolean logging = true;
+String sid = "yourSID";
+String clientSecret = "yourClientSecret";
+WnsService service = new WnsService(sid, clientSecret, logging);
+</code></pre>
+
+<p>Write the following to send a Badge:</p>
+
+<pre><code>String channelUri = "yourChannelUri";
+WnsBadge badge =  new WnsBadgeBuilder().value(1).build();
+service.pushBadge(channelUri, badge);
+</code></pre>
+
+<p>Write the following to send a Tile:</p>
+
+<pre><code>String channelUri = "yourChannelUri";
+WnsTile tile =  new WnsTileBuilder.bindingTemplateTileWideText03("Hello world").build();
+service.pushTile(channelUri, tile);
+</code></pre>
+
+<p>Write the following to send a Toast:</p>
+
+<pre><code>String channelUri = "yourChannelUri";
+WnsToast toast =  new WnsToastBuilder.bindingTemplateToastText01("Hello world").build();
+service.pushToast(channelUri, toast);
+</code></pre>
+
+<h2>
+<a name="notification-builders" class="anchor" href="#notification-builders"><span class="octicon octicon-link"></span></a>Notification builders</h2>
+
+<p>To create and customize notifications, you should use the following builders:</p>
+
+<ul>
+<li>WnsBadgeBuilder</li>
+<li>WnsToastBuilder</li>
+<li>WnsTileBuilder</li>
+</ul><p>WnsToastBuilder and WnsTileBuilder have methods with the following signature:</p>
+
+<pre><code>bindingTemplateXXX()
+</code></pre>
+
+<p>Please check the Toast and Tile templates in the Links section to use the one you need.</p>
+
+<h2>
+<a name="response-headers" class="anchor" href="#response-headers"><span class="octicon octicon-link"></span></a>Response headers</h2>
+
+<p>The pushXXX methods of WnsService return an object of the WnsNotificationResponse type. 
+This object contains the values specified in the Headers (Send notification response section) in the Links section.</p>
+
+<h2>
+<a name="request-optional-headers" class="anchor" href="#request-optional-headers"><span class="octicon octicon-link"></span></a>Request optional headers</h2>
+
+<p>There are pushXXX methods implementations that receive an object of the WnsNotificationRequestOptional type.
+You should create an object of this type and set the corresponding values, according to the Headers (Request parameters) in the Links Section.</p>
+
+<h2>
+<a name="links" class="anchor" href="#links"><span class="octicon octicon-link"></span></a>Links</h2>
+
+<p>This library was built based on the following Microsoft documentation:</p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh913756.aspx">Overview</a></p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465460.aspx">Sending push notifications</a></p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/br212853.aspx">Schemas</a></p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761494.aspx">Toast templates</a></p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761492.aspx">Toast audio options</a></p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx">Tile templates</a></p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx">Headers</a></p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Licensed under the <a href="http://www.opensource.org/licenses/BSD-3-Clause">New 3-Clause BSD License</a>.</p>
+
+<pre><code>Copyright 2013, Fernando Sproviero.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+  * Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above
+    copyright notice, this list of conditions and the following disclaimer
+    in the documentation and/or other materials provided with the
+    distribution.
+  * Neither the name of Fernando Sproviero nor the names of its
+    contributors may be used to endorse or promote products derived from
+    this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Java-wns maintained by <a href="https://github.com/fernandospr">fernandospr</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>

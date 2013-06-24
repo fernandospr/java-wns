@@ -112,17 +112,17 @@ WnsToastBuilder and WnsTileBuilder have methods with the following signature:
 ```
 bindingTemplateXXX()
 ```
-Please check the Toast and Tile templates in the Links section to use the one you need.
+Please check the Toast and Tile templates in the <a href="#links">Links section</a> to use the one you need.
 
 
 ## Response headers
 The pushXXX methods of WnsService return an object of the WnsNotificationResponse type. 
-This object contains the values specified in the Headers (Send notification response section) in the Links section.
+This object contains the values specified in the Headers (Send notification response section) in the <a href="#links">Links section</a>.
 
 
 ## Request optional headers
 There are pushXXX methods implementations that receive an object of the WnsNotificationRequestOptional type.
-You should create an object of this type and set the corresponding values, according to the Headers (Request parameters) in the Links Section.
+You should create an object of this type and set the corresponding values, according to the Headers (Request parameters) in the <a href="#links">Links Section</a>.
 
 
 ## Links

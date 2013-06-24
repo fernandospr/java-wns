@@ -1,6 +1,6 @@
 ## Introduction
 
-java-wns is a Java client for Windows Push Notification service (WNS).
+**java-wns** is a Java client for <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh913756.aspx">Windows Push Notification service (WNS)</a>.
 
 This library will let you implement the Cloud Service of the diagram below:
 
@@ -8,15 +8,15 @@ This library will let you implement the Cloud Service of the diagram below:
 
 
 ## Steps
-First, you will need to register your Windows application in the store to get a SID (Package security identifier) and Client Secret codes.
+* <a href="#first-step---registration">First</a>, you will need to register your Windows application in the store to get a SID (Package security identifier) and Client Secret codes.
 
-Second, obtain the Channel URI of your devices.
+* <a href="#second-step---obtain-channel-uri">Second</a>, obtain the Channel URI of your devices.
 
-Third, use this library to authenticate with WNS and send the notifications!
+* <a href="#third-step---send-notifications">Third</a>, use this library to authenticate with WNS and send the notifications!
 
 
 ### First step - Registration
-Go to the Windows Store app development page of the Windows Dev Center and sign in with your Microsoft account.
+Go to the <a href="http://go.microsoft.com/fwlink/p/?linkid=234306">Windows Store app development page</a> of the Windows Dev Center and sign in with your Microsoft account.
 
 Once you have signed in, select the Dashboard tab.
 
@@ -34,7 +34,7 @@ Save the SID (Package security identifier) and Client Secret, example screenshot
 
 Add the following code to your Windows app:
 
-Javascript:
+Javascript
 ```
 var channel;
 var pushNotifications = Windows.Networking.PushNotifications;
@@ -57,7 +57,7 @@ PushNotificationChannel channel = null;
 try
 {
     channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-    // Success. The channel URI is found in channel.uri.
+    // Success. The channel URI is found in channel.Uri.
 }
 
 catch (Exception ex)

@@ -1,7 +1,7 @@
 package ar.com.fernandospr.wns.model.types;
 
 /**
- *  From http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+ * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx</a>
  */
 public final class WnsNotificationStatusType {
 	public static final String RECEIVED = "received";

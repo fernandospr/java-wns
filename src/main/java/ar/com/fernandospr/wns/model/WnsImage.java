@@ -3,8 +3,9 @@ package ar.com.fernandospr.wns.model;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-// http://msdn.microsoft.com/en-us/library/windows/apps/br230844.aspx
-
+/**
+ * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230844.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/br230844.aspx</a> 
+ */
 @XmlRootElement(name = "image")
 public class WnsImage {
 	

@@ -1,7 +1,7 @@
 package ar.com.fernandospr.wns.model.types;
 
 /**
- * http://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx
+ * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx</a>
  */
 public final class WnsTileTemplate {
 	public static final String TILESQUAREBLOCK = "TileSquareBlock";

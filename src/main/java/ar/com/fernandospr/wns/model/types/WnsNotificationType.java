@@ -1,7 +1,7 @@
 package ar.com.fernandospr.wns.model.types;
 
 /**
- *  From http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx
+ * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx</a>
  */
 public final class WnsNotificationType {
 	public static final String TOAST = "wns/toast";

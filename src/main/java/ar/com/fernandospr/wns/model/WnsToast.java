@@ -4,8 +4,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-// http://msdn.microsoft.com/en-us/library/windows/apps/br230846.aspx
-
+/**
+ * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230846.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/br230846.aspx</a>
+ */
 @XmlRootElement(name = "toast")
 public class WnsToast extends WnsAbstractNotification {
 	

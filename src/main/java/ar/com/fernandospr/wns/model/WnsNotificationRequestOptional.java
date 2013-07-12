@@ -1,7 +1,7 @@
 package ar.com.fernandospr.wns.model;
 
 /**
- * Optional headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_request
+ * Optional headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_request">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_request</a>
  */
 public class WnsNotificationRequestOptional {
 	/**

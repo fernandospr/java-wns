@@ -72,7 +72,7 @@ public class WnsService {
 	}
 	
 	/**
-	 * Based on http://msdn.microsoft.com/en-us/library/windows/apps/hh465407.aspx
+	 * Based on <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465407.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/hh465407.aspx</a>
 	 * @throws WnsException when authentication fails
 	 */
 	protected WnsOAuthToken getAccessToken() throws WnsException {
@@ -96,7 +96,7 @@ public class WnsService {
 	 * Pushes a tile to channelUri
 	 * @param channelUri
 	 * @param tile which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsTileBuilder}
-	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response"</a>
 	 */
 	public WnsNotificationResponse pushTile(String channelUri, WnsTile tile) {
 		return this.pushTile(channelUri, null, tile);
@@ -107,7 +107,7 @@ public class WnsService {
 	 * @param channelUri
 	 * @param optional
 	 * @param tile which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsTileBuilder}
-	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public WnsNotificationResponse pushTile(String channelUri, WnsNotificationRequestOptional optional, WnsTile tile) {
 		return this.push(channelUri, WnsNotificationType.TILE, tile, this.retryPolicy, optional);
@@ -117,7 +117,7 @@ public class WnsService {
 	 * Pushes a toast to channelUri
 	 * @param channelUri
 	 * @param toast which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsToastBuilder}
-	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public WnsNotificationResponse pushToast(String channelUri, WnsToast toast) {
 		return this.pushToast(channelUri, null, toast);
@@ -128,7 +128,7 @@ public class WnsService {
 	 * @param channelUri
 	 * @param optional
 	 * @param toast which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsToastBuilder}
-	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public WnsNotificationResponse pushToast(String channelUri, WnsNotificationRequestOptional optional, WnsToast toast) {
 		return this.push(channelUri, WnsNotificationType.TOAST, toast, this.retryPolicy, optional);
@@ -138,7 +138,7 @@ public class WnsService {
 	 * Pushes a badge to channelUri
 	 * @param channelUri
 	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
-	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public WnsNotificationResponse pushBadge(String channelUri, WnsBadge badge) {
 		return this.pushBadge(channelUri, null, badge);
@@ -149,7 +149,7 @@ public class WnsService {
 	 * @param channelUri
 	 * @param optional
 	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
-	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public WnsNotificationResponse pushBadge(String channelUri, WnsNotificationRequestOptional optional, WnsBadge badge) {
 		return this.push(channelUri, WnsNotificationType.BADGE, badge, this.retryPolicy, optional);
@@ -159,7 +159,7 @@ public class WnsService {
 	 * Pushes a tile to channelUris
 	 * @param channelUris
 	 * @param tile which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsTileBuilder}
-	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public List<WnsNotificationResponse> pushTile(List<String> channelUris, WnsTile tile) {
 		return this.pushTile(channelUris, null, tile);
@@ -170,7 +170,7 @@ public class WnsService {
 	 * @param channelUris
 	 * @param optional
 	 * @param tile which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsTileBuilder}
-	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public List<WnsNotificationResponse> pushTile(List<String> channelUris, WnsNotificationRequestOptional optional, WnsTile tile) {
 		return this.push(channelUris, WnsNotificationType.TILE, tile, this.retryPolicy, optional);
@@ -180,7 +180,7 @@ public class WnsService {
 	 * Pushes a toast to channelUris
 	 * @param channelUris
 	 * @param toast which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsToastBuilder}
-	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public List<WnsNotificationResponse> pushToast(List<String> channelUris, WnsToast toast) {
 		return this.pushToast(channelUris, null, toast);
@@ -191,7 +191,7 @@ public class WnsService {
 	 * @param channelUris
 	 * @param optional
 	 * @param toast which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsToastBuilder}
-	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public List<WnsNotificationResponse> pushToast(List<String> channelUris, WnsNotificationRequestOptional optional, WnsToast toast) {
 		return this.push(channelUris, WnsNotificationType.TOAST, toast, this.retryPolicy, optional);
@@ -201,7 +201,7 @@ public class WnsService {
 	 * Pushes a badge to channelUris
 	 * @param channelUris
 	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
-	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public List<WnsNotificationResponse> pushBadge(List<String> channelUris, WnsBadge badge) {
 		return this.pushBadge(channelUris, null, badge);
@@ -212,7 +212,7 @@ public class WnsService {
 	 * @param channelUris
 	 * @param optional
 	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
-	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public List<WnsNotificationResponse> pushBadge(List<String> channelUris, WnsNotificationRequestOptional optional, WnsBadge badge) {
 		return this.push(channelUris, WnsNotificationType.BADGE, badge, this.retryPolicy, optional);
@@ -223,7 +223,7 @@ public class WnsService {
 	 * @param type should be any of {@link ar.com.fernandospr.wns.model.types.WnsNotificationType}
 	 * @param notification
 	 * @param retriesLeft to push the notification if the token expires
-	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	protected List<WnsNotificationResponse> push(List<String> channelUris, String type, WnsAbstractNotification notification, int retriesLeft, WnsNotificationRequestOptional optional) {
 		List<WnsNotificationResponse> responses = new ArrayList<WnsNotificationResponse>();
@@ -239,7 +239,7 @@ public class WnsService {
 	 * @param type should be any of {@link ar.com.fernandospr.wns.model.types.WnsNotificationType}
 	 * @param notification
 	 * @param retriesLeft to push the notification if the token expires
-	 * @return WnsNotificationResponse please see response headers from http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	protected WnsNotificationResponse push(String channelUri, String type, WnsAbstractNotification notification, int retriesLeft, WnsNotificationRequestOptional optional) {
 		WebResource webResource = this.client.resource(channelUri);

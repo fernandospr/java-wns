@@ -1,7 +1,7 @@
 package ar.com.fernandospr.wns.model.types;
 
 /**
- * From from http://msdn.microsoft.com/en-us/library/windows/apps/hh761492.aspx
+ * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761492.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/hh761492.aspx</a>
  */
 public final class WnsToastSoundSource {
 	public static final String DEFAULT = "ms-winsoundevent:Notification.Default";

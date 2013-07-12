@@ -4,8 +4,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
-// http://msdn.microsoft.com/en-us/library/windows/apps/br230845.aspx
-
+/**
+ * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230845.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/br230845.aspx</a>
+ */
 @XmlRootElement(name = "text")
 public class WnsText {
 	

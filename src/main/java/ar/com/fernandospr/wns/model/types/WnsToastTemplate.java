@@ -1,7 +1,7 @@
 package ar.com.fernandospr.wns.model.types;
 
 /**
- * http://msdn.microsoft.com/en-us/library/windows/apps/hh761494.aspx
+ * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761494.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/hh761494.aspx</a>
  */
 public final class WnsToastTemplate {
 	public static final String TOASTTEXT01 = "ToastText01";

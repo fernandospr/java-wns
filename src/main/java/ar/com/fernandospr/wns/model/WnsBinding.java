@@ -6,8 +6,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-// http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx
-
+/**
+ * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx</a>
+ */
 @XmlRootElement(name = "binding")
 public class WnsBinding {
 	

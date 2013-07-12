@@ -3,7 +3,7 @@ package ar.com.fernandospr.wns.model;
 import javax.ws.rs.core.MultivaluedMap;
 
 /**
- * From http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response
+ * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
  */
 public class WnsNotificationResponse {
 	public final String channelUri;

@@ -7,6 +7,13 @@ This library will let you implement the Cloud Service of the diagram below:
 <img src="http://i.msdn.microsoft.com/dynimg/IC554245.png"/>
 
 
+## Updates
+Version 1.1 is released!
+
+**Changes** 
+* Send a notification to multiple channelUris
+
+
 ## Steps
 * <a href="#first-step---registration">First</a>, you will need to register your Windows application in the store to get a SID (Package security identifier) and Client Secret codes.
 

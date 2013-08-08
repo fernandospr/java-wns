@@ -38,6 +38,19 @@
 <p><img src="http://i.msdn.microsoft.com/dynimg/IC554245.png"></p>
 
 <h2>
+<a name="updates" class="anchor" href="#updates"><span class="octicon octicon-link"></span></a>Updates</h2>
+
+<p>Version 1.2 is released!</p>
+
+<p><strong>1.2 Changes</strong> </p>
+
+<ul>
+<li>Send raw notifications</li>
+</ul><p><strong>1.1 Changes</strong> </p>
+
+<ul>
+<li>Send a notification to multiple channelUris</li>
+</ul><h2>
 <a name="steps" class="anchor" href="#steps"><span class="octicon octicon-link"></span></a>Steps</h2>
 
 <ul>
@@ -55,7 +68,7 @@
 
 <p>If you want your devices to receive Toast notifications, you should also change "Toast capable" to YES in the manifest configuration.</p>
 
-<p>Go to Services&gt;Push notifications and Live Connect services info and below "If your app uses WNS for push notifications, review", select Authenticating yor service.</p>
+<p>Go to Services&gt;Push notifications and Live Connect services info and below "If your app uses WNS for push notifications, review", select Authenticating your service.</p>
 
 <p>Save the SID (Package security identifier) and Client Secret, example screenshot below:
 <img src="http://i.msdn.microsoft.com/dynimg/IC582761.png"></p>
@@ -110,25 +123,32 @@ String clientSecret = "yourClientSecret";
 WnsService service = new WnsService(sid, clientSecret, logging);
 </code></pre>
 
-<p>Write the following to send a Badge:</p>
+<p>Write the following to send a Badge notification:</p>
 
 <pre><code>String channelUri = "yourChannelUri";
 WnsBadge badge =  new WnsBadgeBuilder().value(1).build();
 service.pushBadge(channelUri, badge);
 </code></pre>
 
-<p>Write the following to send a Tile:</p>
+<p>Write the following to send a Tile notification:</p>
 
 <pre><code>String channelUri = "yourChannelUri";
 WnsTile tile =  new WnsTileBuilder.bindingTemplateTileWideText03("Hello world").build();
 service.pushTile(channelUri, tile);
 </code></pre>
 
-<p>Write the following to send a Toast:</p>
+<p>Write the following to send a Toast notification:</p>
 
 <pre><code>String channelUri = "yourChannelUri";
 WnsToast toast =  new WnsToastBuilder.bindingTemplateToastText01("Hello world").build();
 service.pushToast(channelUri, toast);
+</code></pre>
+
+<p>Write the following to send a Raw notification:</p>
+
+<pre><code>String channelUri = "yourChannelUri";
+WnsRaw raw =  new WnsRawBuilder.stream("Hello world".getBytes()).build();
+service.pushRaw(channelUri, raw);
 </code></pre>
 
 <h2>
@@ -140,6 +160,7 @@ service.pushToast(channelUri, toast);
 <li>WnsBadgeBuilder</li>
 <li>WnsToastBuilder</li>
 <li>WnsTileBuilder</li>
+<li>WnsRawBuilder</li>
 </ul><p>WnsToastBuilder and WnsTileBuilder have methods with the following signature:</p>
 
 <pre><code>bindingTemplateXXX()
@@ -175,6 +196,8 @@ You should create an object of this type and set the corresponding values, accor
 <p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761492.aspx">Toast audio options</a></p>
 
 <p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx">Tile templates</a></p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/jj676791.aspx">Raw notification overview</a></p>
 
 <p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx">Headers</a></p>
 
@@ -231,6 +254,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </div>
     </div>
 
-  
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-43057045-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>

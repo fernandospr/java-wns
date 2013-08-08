@@ -74,15 +74,14 @@ public class WnsClient {
 	/**
 	 * @param channelUri
 	 * @param resourceBuilder
-	 * @param type should be any of {@link ar.com.fernandospr.wns.model.types.WnsNotificationType}
 	 * @param notification
 	 * @param retriesLeft to push the notification if the token expires
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
-	public WnsNotificationResponse push(WnsResourceBuilder resourceBuilder, String channelUri, String type, WnsAbstractNotification notification, int retriesLeft, WnsNotificationRequestOptional optional) {
+	public WnsNotificationResponse push(WnsResourceBuilder resourceBuilder, String channelUri, WnsAbstractNotification notification, int retriesLeft, WnsNotificationRequestOptional optional) {
 		WebResource webResource = this.client.resource(channelUri);
 		
-		Builder webResourceBuilder = resourceBuilder.build(webResource, notification, type, this.token.access_token, optional);
+		Builder webResourceBuilder = resourceBuilder.build(webResource, notification, this.token.access_token, optional);
 		
 		ClientResponse response = webResourceBuilder.post(ClientResponse.class);
 		
@@ -96,7 +95,7 @@ public class WnsClient {
 			// Access token may have expired
 			refreshAccessToken();
 			// Retry
-			return this.push(resourceBuilder, channelUri, type, notification, retriesLeft, optional);
+			return this.push(resourceBuilder, channelUri, notification, retriesLeft, optional);
 		}
 		
 		// Assuming push failed
@@ -106,15 +105,14 @@ public class WnsClient {
 	/**
 	 * @param channelUris
 	 * @param resourceBuilder
-	 * @param type should be any of {@link ar.com.fernandospr.wns.model.types.WnsNotificationType}
 	 * @param notification
 	 * @param retriesLeft to push the notification if the token expires
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
-	public List<WnsNotificationResponse> push(WnsResourceBuilder resourceBuilder, List<String> channelUris, String type, WnsAbstractNotification notification, int retriesLeft, WnsNotificationRequestOptional optional) {
+	public List<WnsNotificationResponse> push(WnsResourceBuilder resourceBuilder, List<String> channelUris, WnsAbstractNotification notification, int retriesLeft, WnsNotificationRequestOptional optional) {
 		List<WnsNotificationResponse> responses = new ArrayList<WnsNotificationResponse>();
 		for (String channelUri : channelUris) {
-			WnsNotificationResponse response = push(resourceBuilder, channelUri, type, notification, retriesLeft, optional);
+			WnsNotificationResponse response = push(resourceBuilder, channelUri, notification, retriesLeft, optional);
 			responses.add(response);
 		}
 		return responses;

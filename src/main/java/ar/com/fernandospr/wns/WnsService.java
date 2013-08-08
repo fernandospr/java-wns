@@ -13,7 +13,6 @@ import ar.com.fernandospr.wns.model.WnsNotificationResponse;
 import ar.com.fernandospr.wns.model.WnsRaw;
 import ar.com.fernandospr.wns.model.WnsTile;
 import ar.com.fernandospr.wns.model.WnsToast;
-import ar.com.fernandospr.wns.model.types.WnsNotificationType;
 
 public class WnsService {	
 	private int retryPolicy = 5; // By default retry 5 times
@@ -61,7 +60,7 @@ public class WnsService {
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public WnsNotificationResponse pushTile(String channelUri, WnsNotificationRequestOptional optional, WnsTile tile) {
-		return this.client.push(xmlResourceBuilder, channelUri, WnsNotificationType.TILE, tile, this.retryPolicy, optional);
+		return this.client.push(xmlResourceBuilder, channelUri, tile, this.retryPolicy, optional);
 	}
 	
 	/**
@@ -82,7 +81,7 @@ public class WnsService {
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public List<WnsNotificationResponse> pushTile(List<String> channelUris, WnsNotificationRequestOptional optional, WnsTile tile) {
-		return this.client.push(xmlResourceBuilder, channelUris, WnsNotificationType.TILE, tile, this.retryPolicy, optional);
+		return this.client.push(xmlResourceBuilder, channelUris, tile, this.retryPolicy, optional);
 	}
 	
 	/**
@@ -103,7 +102,7 @@ public class WnsService {
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public WnsNotificationResponse pushToast(String channelUri, WnsNotificationRequestOptional optional, WnsToast toast) {
-		return this.client.push(xmlResourceBuilder, channelUri, WnsNotificationType.TOAST, toast, this.retryPolicy, optional);
+		return this.client.push(xmlResourceBuilder, channelUri, toast, this.retryPolicy, optional);
 	}
 	
 	/**
@@ -124,7 +123,7 @@ public class WnsService {
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public List<WnsNotificationResponse> pushToast(List<String> channelUris, WnsNotificationRequestOptional optional, WnsToast toast) {
-		return this.client.push(xmlResourceBuilder, channelUris, WnsNotificationType.TOAST, toast, this.retryPolicy, optional);
+		return this.client.push(xmlResourceBuilder, channelUris, toast, this.retryPolicy, optional);
 	}
 	
 	/**
@@ -145,7 +144,7 @@ public class WnsService {
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public WnsNotificationResponse pushBadge(String channelUri, WnsNotificationRequestOptional optional, WnsBadge badge) {
-		return this.client.push(xmlResourceBuilder, channelUri, WnsNotificationType.BADGE, badge, this.retryPolicy, optional);
+		return this.client.push(xmlResourceBuilder, channelUri, badge, this.retryPolicy, optional);
 	}
 	
 	/**
@@ -166,7 +165,7 @@ public class WnsService {
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public List<WnsNotificationResponse> pushBadge(List<String> channelUris, WnsNotificationRequestOptional optional, WnsBadge badge) {
-		return this.client.push(xmlResourceBuilder, channelUris, WnsNotificationType.BADGE, badge, this.retryPolicy, optional);
+		return this.client.push(xmlResourceBuilder, channelUris, badge, this.retryPolicy, optional);
 	}
 	
 	/**
@@ -187,7 +186,7 @@ public class WnsService {
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public WnsNotificationResponse pushRaw(String channelUri, WnsNotificationRequestOptional optional, WnsRaw raw) {
-		return this.client.push(rawResourceBuilder, channelUri, WnsNotificationType.RAW, raw, this.retryPolicy, optional);
+		return this.client.push(rawResourceBuilder, channelUri, raw, this.retryPolicy, optional);
 	}
 	
 	/**
@@ -208,6 +207,6 @@ public class WnsService {
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public List<WnsNotificationResponse> pushRaw(List<String> channelUris, WnsNotificationRequestOptional optional, WnsRaw raw) {
-		return this.client.push(rawResourceBuilder, channelUris, WnsNotificationType.RAW, raw, this.retryPolicy, optional);
+		return this.client.push(rawResourceBuilder, channelUris, raw, this.retryPolicy, optional);
 	}
 }

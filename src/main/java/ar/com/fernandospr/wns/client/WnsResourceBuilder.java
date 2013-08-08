@@ -11,9 +11,9 @@ import com.sun.jersey.api.client.WebResource.Builder;
 
 public abstract class WnsResourceBuilder {
 	
-	public Builder build(WebResource webResource, WnsAbstractNotification notification, String type, String token, WnsNotificationRequestOptional optional) {
+	public Builder build(WebResource webResource, WnsAbstractNotification notification, String token, WnsNotificationRequestOptional optional) {
 		Builder webResourceBuilder = webResource.getRequestBuilder();
-		addRequiredHeaders(webResourceBuilder, type, token);
+		addRequiredHeaders(webResourceBuilder, notification.getType(), token);
 		addOptionalHeaders(webResourceBuilder, optional);
 		webResourceBuilder.entity(this.getEntityToSendWithNotification(notification));
 		return webResourceBuilder;

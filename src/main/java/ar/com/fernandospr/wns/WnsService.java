@@ -1,5 +1,6 @@
 package ar.com.fernandospr.wns;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -218,6 +219,57 @@ public class WnsService {
 		return this.push(channelUris, WnsNotificationType.BADGE, badge, this.retryPolicy, optional);
 	}
 	
+	public WnsNotificationResponse pushRaw(String channelUri, byte[] buffer) {
+		return this.pushRaw(channelUri, null, buffer);
+	}
+	
+	public WnsNotificationResponse pushRaw(String channelUri, WnsNotificationRequestOptional optional, byte[] buffer) {
+		return this.pushRaw(channelUri, buffer, this.retryPolicy, optional);
+	}
+	
+	public List<WnsNotificationResponse> pushRaw(List<String> channelUris, byte[] buffer) {
+		return this.pushRaw(channelUris, null, buffer);
+	}
+	
+	public List<WnsNotificationResponse> pushRaw(List<String> channelUris, WnsNotificationRequestOptional optional, byte[] buffer) {
+		return this.pushRaw(channelUris, buffer, this.retryPolicy, optional);
+	}
+	
+	protected List<WnsNotificationResponse> pushRaw(List<String> channelUris, byte[] buffer, int retriesLeft, WnsNotificationRequestOptional optional) {
+		List<WnsNotificationResponse> responses = new ArrayList<WnsNotificationResponse>();
+		for (String channelUri : channelUris) {
+			WnsNotificationResponse response = pushRaw(channelUri, buffer, retriesLeft, optional);
+			responses.add(response);
+		}
+		return responses;
+	}
+	
+	public WnsNotificationResponse pushRaw(String channelUri, byte[] buffer, int retriesLeft, WnsNotificationRequestOptional optional) {
+		WebResource webResource = this.client.resource(channelUri);
+		
+		Builder webResourceBuilder = webResource.getRequestBuilder();
+		addRequiredHeaders(webResourceBuilder, WnsNotificationType.RAW, this.token.access_token);
+		addOptionalHeaders(webResourceBuilder, optional);
+		
+		ClientResponse response = webResourceBuilder.post(ClientResponse.class, new ByteArrayInputStream(buffer));
+		
+		WnsNotificationResponse notificationResponse = new WnsNotificationResponse(channelUri, response.getStatus(), response.getHeaders());
+		if (notificationResponse.code == 200) {
+			return notificationResponse;
+		}
+		
+		if (notificationResponse.code == 401 && retriesLeft > 0) {
+			retriesLeft--;
+			// Access token may have expired
+			this.token = getAccessToken();
+			// Retry
+			return this.pushRaw(channelUri, optional, buffer);
+		}
+		
+		// Assuming push failed
+		return notificationResponse;
+	}
+	
 	/**
 	 * @param channelUris
 	 * @param type should be any of {@link ar.com.fernandospr.wns.model.types.WnsNotificationType}
@@ -244,7 +296,7 @@ public class WnsService {
 	protected WnsNotificationResponse push(String channelUri, String type, WnsAbstractNotification notification, int retriesLeft, WnsNotificationRequestOptional optional) {
 		WebResource webResource = this.client.resource(channelUri);
 		
-		Builder webResourceBuilder = webResource.type(MediaType.TEXT_XML);
+		Builder webResourceBuilder = webResource.getRequestBuilder();
 		addRequiredHeaders(webResourceBuilder, type, this.token.access_token);
 		addOptionalHeaders(webResourceBuilder, optional);
 		
@@ -285,8 +337,13 @@ public class WnsService {
 	}
 
 	protected void addRequiredHeaders(Builder webResourceBuilder, String type, String accessToken) {
-		 webResourceBuilder.header("X-WNS-Type", type)
-		 				   .header("Authorization", "Bearer " + accessToken);
+		if (type.equalsIgnoreCase(WnsNotificationType.RAW)) {
+			webResourceBuilder.type(MediaType.APPLICATION_OCTET_STREAM);
+		} else {
+			webResourceBuilder.type(MediaType.TEXT_XML);
+		}
+		webResourceBuilder.header("X-WNS-Type", type)
+		 				  .header("Authorization", "Bearer " + accessToken);
 	}
 	
 	private boolean emptyString(String str) {

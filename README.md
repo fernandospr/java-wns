@@ -8,9 +8,12 @@ This library will let you implement the Cloud Service of the diagram below:
 
 
 ## Updates
-Version 1.1 is released!
+Version 1.2 is released!
 
-**Changes** 
+**1.2 Changes** 
+* Send raw notifications
+
+**1.1 Changes** 
 * Send a notification to multiple channelUris
 
 
@@ -31,7 +34,7 @@ On the Dashboard, submit your Windows app and update your package.appxmanifest w
 
 If you want your devices to receive Toast notifications, you should also change "Toast capable" to YES in the manifest configuration.
 
-Go to Services>Push notifications and Live Connect services info and below "If your app uses WNS for push notifications, review", select Authenticating yor service.
+Go to Services>Push notifications and Live Connect services info and below "If your app uses WNS for push notifications, review", select Authenticating your service.
 
 Save the SID (Package security identifier) and Client Secret, example screenshot below:
 <img src="http://i.msdn.microsoft.com/dynimg/IC582761.png"/>
@@ -86,25 +89,32 @@ String clientSecret = "yourClientSecret";
 WnsService service = new WnsService(sid, clientSecret, logging);
 ```
 
-Write the following to send a Badge:
+Write the following to send a Badge notification:
 ```
 String channelUri = "yourChannelUri";
 WnsBadge badge =  new WnsBadgeBuilder().value(1).build();
 service.pushBadge(channelUri, badge);
 ```
 
-Write the following to send a Tile:
+Write the following to send a Tile notification:
 ```
 String channelUri = "yourChannelUri";
 WnsTile tile =  new WnsTileBuilder.bindingTemplateTileWideText03("Hello world").build();
 service.pushTile(channelUri, tile);
 ```
 
-Write the following to send a Toast:
+Write the following to send a Toast notification:
 ```
 String channelUri = "yourChannelUri";
 WnsToast toast =  new WnsToastBuilder.bindingTemplateToastText01("Hello world").build();
 service.pushToast(channelUri, toast);
+```
+
+Write the following to send a Raw notification:
+```
+String channelUri = "yourChannelUri";
+WnsRaw raw =  new WnsRawBuilder.stream("Hello world".getBytes()).build();
+service.pushRaw(channelUri, raw);
 ```
 
 
@@ -114,6 +124,7 @@ To create and customize notifications, you should use the following builders:
 * WnsBadgeBuilder
 * WnsToastBuilder
 * WnsTileBuilder
+* WnsRawBuilder
 
 WnsToastBuilder and WnsTileBuilder have methods with the following signature:
 ```
@@ -146,6 +157,8 @@ This library was built based on the following Microsoft documentation:
 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761492.aspx">Toast audio options</a>
 
 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx">Tile templates</a>
+
+<a href="http://msdn.microsoft.com/en-us/library/windows/apps/jj676791.aspx">Raw notification overview</a>
 
 <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx">Headers</a>
 

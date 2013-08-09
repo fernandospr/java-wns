@@ -171,7 +171,7 @@ public class WnsService {
 	/**
 	 * Pushes a badge to channelUri
 	 * @param channelUri
-	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
+	 * @param raw which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
 	 */
 	public WnsNotificationResponse pushRaw(String channelUri, WnsRaw raw) {

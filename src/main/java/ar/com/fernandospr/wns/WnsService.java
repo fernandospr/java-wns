@@ -24,9 +24,8 @@ public class WnsService {
 	/**
 	 * @param sid
 	 * @param clientSecret
-	 * @throws WnsException when authentication fails
 	 */
-	public WnsService(String sid, String clientSecret) throws WnsException {
+	public WnsService(String sid, String clientSecret) {
 		this(sid,clientSecret, false);
 	}
 	
@@ -34,9 +33,8 @@ public class WnsService {
 	 * @param sid
 	 * @param clientSecret
 	 * @param logging true if System.out logging is needed
-	 * @throws WnsException when authentication fails
 	 */
-	public WnsService(String sid, String clientSecret, boolean logging) throws WnsException {
+	public WnsService(String sid, String clientSecret, boolean logging) {
 		this.client = new WnsClient(sid, clientSecret, logging);
 		this.xmlResourceBuilder = new WnsXmlResourceBuilder();
 		this.rawResourceBuilder = new WnsRawResourceBuilder();
@@ -47,8 +45,9 @@ public class WnsService {
 	 * @param channelUri
 	 * @param tile which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsTileBuilder}
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response"</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public WnsNotificationResponse pushTile(String channelUri, WnsTile tile) {
+	public WnsNotificationResponse pushTile(String channelUri, WnsTile tile) throws WnsException {
 		return this.pushTile(channelUri, null, tile);
 	}
 	
@@ -58,8 +57,9 @@ public class WnsService {
 	 * @param optional
 	 * @param tile which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsTileBuilder}
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public WnsNotificationResponse pushTile(String channelUri, WnsNotificationRequestOptional optional, WnsTile tile) {
+	public WnsNotificationResponse pushTile(String channelUri, WnsNotificationRequestOptional optional, WnsTile tile) throws WnsException {
 		return this.client.push(xmlResourceBuilder, channelUri, tile, this.retryPolicy, optional);
 	}
 	
@@ -68,8 +68,9 @@ public class WnsService {
 	 * @param channelUris
 	 * @param tile which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsTileBuilder}
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public List<WnsNotificationResponse> pushTile(List<String> channelUris, WnsTile tile) {
+	public List<WnsNotificationResponse> pushTile(List<String> channelUris, WnsTile tile) throws WnsException {
 		return this.pushTile(channelUris, null, tile);
 	}
 	
@@ -79,8 +80,9 @@ public class WnsService {
 	 * @param optional
 	 * @param tile which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsTileBuilder}
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public List<WnsNotificationResponse> pushTile(List<String> channelUris, WnsNotificationRequestOptional optional, WnsTile tile) {
+	public List<WnsNotificationResponse> pushTile(List<String> channelUris, WnsNotificationRequestOptional optional, WnsTile tile) throws WnsException {
 		return this.client.push(xmlResourceBuilder, channelUris, tile, this.retryPolicy, optional);
 	}
 	
@@ -89,8 +91,9 @@ public class WnsService {
 	 * @param channelUri
 	 * @param toast which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsToastBuilder}
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public WnsNotificationResponse pushToast(String channelUri, WnsToast toast) {
+	public WnsNotificationResponse pushToast(String channelUri, WnsToast toast) throws WnsException {
 		return this.pushToast(channelUri, null, toast);
 	}
 	
@@ -100,8 +103,9 @@ public class WnsService {
 	 * @param optional
 	 * @param toast which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsToastBuilder}
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public WnsNotificationResponse pushToast(String channelUri, WnsNotificationRequestOptional optional, WnsToast toast) {
+	public WnsNotificationResponse pushToast(String channelUri, WnsNotificationRequestOptional optional, WnsToast toast) throws WnsException {
 		return this.client.push(xmlResourceBuilder, channelUri, toast, this.retryPolicy, optional);
 	}
 	
@@ -110,8 +114,9 @@ public class WnsService {
 	 * @param channelUris
 	 * @param toast which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsToastBuilder}
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public List<WnsNotificationResponse> pushToast(List<String> channelUris, WnsToast toast) {
+	public List<WnsNotificationResponse> pushToast(List<String> channelUris, WnsToast toast) throws WnsException {
 		return this.pushToast(channelUris, null, toast);
 	}
 	
@@ -121,8 +126,9 @@ public class WnsService {
 	 * @param optional
 	 * @param toast which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsToastBuilder}
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public List<WnsNotificationResponse> pushToast(List<String> channelUris, WnsNotificationRequestOptional optional, WnsToast toast) {
+	public List<WnsNotificationResponse> pushToast(List<String> channelUris, WnsNotificationRequestOptional optional, WnsToast toast) throws WnsException {
 		return this.client.push(xmlResourceBuilder, channelUris, toast, this.retryPolicy, optional);
 	}
 	
@@ -131,8 +137,9 @@ public class WnsService {
 	 * @param channelUri
 	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public WnsNotificationResponse pushBadge(String channelUri, WnsBadge badge) {
+	public WnsNotificationResponse pushBadge(String channelUri, WnsBadge badge) throws WnsException {
 		return this.pushBadge(channelUri, null, badge);
 	}
 
@@ -142,8 +149,9 @@ public class WnsService {
 	 * @param optional
 	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public WnsNotificationResponse pushBadge(String channelUri, WnsNotificationRequestOptional optional, WnsBadge badge) {
+	public WnsNotificationResponse pushBadge(String channelUri, WnsNotificationRequestOptional optional, WnsBadge badge) throws WnsException {
 		return this.client.push(xmlResourceBuilder, channelUri, badge, this.retryPolicy, optional);
 	}
 	
@@ -152,8 +160,9 @@ public class WnsService {
 	 * @param channelUris
 	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public List<WnsNotificationResponse> pushBadge(List<String> channelUris, WnsBadge badge) {
+	public List<WnsNotificationResponse> pushBadge(List<String> channelUris, WnsBadge badge) throws WnsException {
 		return this.pushBadge(channelUris, null, badge);
 	}
 
@@ -163,8 +172,9 @@ public class WnsService {
 	 * @param optional
 	 * @param badge which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public List<WnsNotificationResponse> pushBadge(List<String> channelUris, WnsNotificationRequestOptional optional, WnsBadge badge) {
+	public List<WnsNotificationResponse> pushBadge(List<String> channelUris, WnsNotificationRequestOptional optional, WnsBadge badge) throws WnsException {
 		return this.client.push(xmlResourceBuilder, channelUris, badge, this.retryPolicy, optional);
 	}
 	
@@ -173,8 +183,9 @@ public class WnsService {
 	 * @param channelUri
 	 * @param raw which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsBadgeBuilder}
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public WnsNotificationResponse pushRaw(String channelUri, WnsRaw raw) {
+	public WnsNotificationResponse pushRaw(String channelUri, WnsRaw raw) throws WnsException {
 		return this.pushRaw(channelUri, null, raw);
 	}
 
@@ -184,8 +195,9 @@ public class WnsService {
 	 * @param optional
 	 * @param raw which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsRawBuilder}
 	 * @return WnsNotificationResponse please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public WnsNotificationResponse pushRaw(String channelUri, WnsNotificationRequestOptional optional, WnsRaw raw) {
+	public WnsNotificationResponse pushRaw(String channelUri, WnsNotificationRequestOptional optional, WnsRaw raw) throws WnsException {
 		return this.client.push(rawResourceBuilder, channelUri, raw, this.retryPolicy, optional);
 	}
 	
@@ -194,8 +206,9 @@ public class WnsService {
 	 * @param channelUris
 	 * @param raw which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsRawBuilder}
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public List<WnsNotificationResponse> pushRaw(List<String> channelUris, WnsRaw raw) {
+	public List<WnsNotificationResponse> pushRaw(List<String> channelUris, WnsRaw raw) throws WnsException {
 		return this.pushRaw(channelUris, null, raw);
 	}
 
@@ -205,8 +218,9 @@ public class WnsService {
 	 * @param optional
 	 * @param raw which should be built with {@link ar.com.fernandospr.wns.model.builders.WnsRawBuilder}
 	 * @return list of WnsNotificationResponse for each channelUri, please see response headers from <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response">http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx#send_notification_response</a>
+	 * @throws WnsException when authentication fails
 	 */
-	public List<WnsNotificationResponse> pushRaw(List<String> channelUris, WnsNotificationRequestOptional optional, WnsRaw raw) {
+	public List<WnsNotificationResponse> pushRaw(List<String> channelUris, WnsNotificationRequestOptional optional, WnsRaw raw) throws WnsException {
 		return this.client.push(rawResourceBuilder, channelUris, raw, this.retryPolicy, optional);
 	}
 }

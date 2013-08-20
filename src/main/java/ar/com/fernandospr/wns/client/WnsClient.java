@@ -33,11 +33,10 @@ public class WnsClient {
 	private WnsOAuthToken token;
 	private Client client;
 	
-	public WnsClient(String sid, String clientSecret, boolean logging) throws WnsException {
+	public WnsClient(String sid, String clientSecret, boolean logging) {
 		this.sid = sid;
 		this.clientSecret = clientSecret;
 		this.client = createClient(logging);
-		refreshAccessToken();
 	}
 	
 	private static Client createClient(boolean logging) {

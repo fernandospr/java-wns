@@ -1,6 +1,7 @@
 package ar.com.fernandospr.wns;
 
 import java.util.List;
+import java.util.Properties;
 
 import ar.com.fernandospr.wns.client.WnsClient;
 import ar.com.fernandospr.wns.client.WnsRawResourceBuilder;
@@ -29,6 +30,28 @@ public class WnsService {
 		this(sid,clientSecret, false);
 	}
 	
+	/**
+	 * @param sid
+	 * @param clientSecret
+	 * @param proxyProperties
+	 */
+	public WnsService(String sid, String clientSecret, Properties proxyProperties) {
+		this(sid,clientSecret,proxyProperties, false);
+	}
+	
+	/**
+	 * @param sid
+	 * @param clientSecret
+	 * @param proxyProperties
+	 * @param logging true if System.out logging is needed
+	 */
+	 public WnsService(String sid, String clientSecret, Properties proxyProperties, boolean logging) {
+		this.client = new WnsClient(sid, clientSecret,proxyProperties, logging);
+		this.xmlResourceBuilder = new WnsXmlResourceBuilder();
+		this.rawResourceBuilder = new WnsRawResourceBuilder();
+	}
+	 
+	 
 	/**
 	 * @param sid
 	 * @param clientSecret

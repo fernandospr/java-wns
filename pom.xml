@@ -48,10 +48,21 @@
 			<version>1.8</version>
 		</dependency>
 		<dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-jaxrs</artifactId>
-        <version>1.9.11</version>
-      </dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-apache-client</artifactId>
+			<version>1.18</version>
+		</dependency>
+		<dependency>
+        		<groupId>org.codehaus.jackson</groupId>
+        		<artifactId>jackson-jaxrs</artifactId>
+        		<version>1.9.11</version>
+      		</dependency>
+      		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

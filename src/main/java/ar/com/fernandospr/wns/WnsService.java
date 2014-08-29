@@ -22,6 +22,11 @@ public class WnsService {
 	private WnsResourceBuilder xmlResourceBuilder;
 	private WnsResourceBuilder rawResourceBuilder;
 	
+	public static String PROXY_HOST = "proxyHost";
+	public static String PROXY_PORT = "proxyPort";
+	public static String PROXY_USER = "proxyUser";
+	public static String PROXY_PASS = "proxyPass";
+	
 	/**
 	 * @param sid
 	 * @param clientSecret

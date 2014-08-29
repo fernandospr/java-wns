@@ -7,7 +7,7 @@ import java.util.Properties;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
-import org.apache.commons.httpclient.auth.AuthScope
+import org.apache.commons.httpclient.auth.AuthScope;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import ar.com.fernandospr.wns.exceptions.WnsException;

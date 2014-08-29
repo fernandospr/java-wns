@@ -2,7 +2,6 @@ package ar.com.fernandospr.wns.client;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -10,6 +9,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
+import ar.com.fernandospr.wns.WnsProxyProperties;
 import ar.com.fernandospr.wns.exceptions.WnsException;
 import ar.com.fernandospr.wns.model.WnsAbstractNotification;
 import ar.com.fernandospr.wns.model.WnsNotificationRequestOptional;
@@ -25,6 +25,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.client.apache.ApacheHttpClient;
 import com.sun.jersey.client.apache.config.DefaultApacheHttpClientConfig;
 import com.sun.jersey.api.client.filter.LoggingFilter;
+import com.sun.jersey.client.apache.config.ApacheHttpClientConfig;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 
@@ -45,10 +46,10 @@ public class WnsClient {
 		this.client = createClient(logging);
 	}
 	
-	public WnsClient(String sid, String clientSecret, Properties proxyProps, boolean logging) {
+	public WnsClient(String sid, String clientSecret, WnsProxyProperties proxyProps, boolean logging) {
 		this.sid = sid;
 		this.clientSecret = clientSecret;
-		this.client = createClient(logging, properties);
+		this.client = createClient(logging, proxyProps);
 	}
 	
 	private static Client createClient(boolean logging) {
@@ -61,7 +62,7 @@ public class WnsClient {
 		return client;
 	}
 	
-	private static Client createClient(boolean logging, Properties proxyProps) {
+	private static Client createClient(boolean logging, WnsProxyProperties proxyProps) {
 		DefaultApacheHttpClientConfig clientConfig = new DefaultApacheHttpClientConfig();
 		setProxyCredentials(clientConfig, proxyProps);
 		clientConfig.getClasses().add(JacksonJsonProvider.class);
@@ -72,12 +73,12 @@ public class WnsClient {
 		return client;
 	}
 	
-	private static setProxyCredentials(DefaultApacheHttpClientConfig clientConfig, Properties proxyProps) {
+	private static void setProxyCredentials(DefaultApacheHttpClientConfig clientConfig, WnsProxyProperties proxyProps) {
 		if(proxyProps != null) {
-			String  proxyHost  = proxyProps.getProperty(WnsService.PROXY_HOST, null);
-			String  proxyPort  = proxyProps.getProperty(WnsService.PROXY_PORT, "8080");
-			String  proxyUser  = proxyProps.getProperty(WnsService.PROXY_USER, null);
-			String  proxyPass  = proxyProps.getProperty(WnsService.PROXY_PASS, null);
+                        int     proxyPort  = proxyProps.getProxyPort();
+			String  proxyHost  = proxyProps.getProxyHost();
+			String  proxyUser  = proxyProps.getProxyUser();
+			String  proxyPass  = proxyProps.getProxyPass();
 			
 			if((proxyHost != null) && (!proxyHost.trim().isEmpty())) {
 				
@@ -87,7 +88,7 @@ public class WnsClient {
 					clientConfig.getProperties().put(ApacheHttpClientConfig.PROPERTY_PREEMPTIVE_AUTHENTICATION, true);
 					clientConfig.getProperties().put(ApacheHttpClientConfig.PROPERTY_INTERACTIVE, true);
 					clientConfig.getState().setCredentials(AuthScope.ANY_REALM, AuthScope.ANY_HOST, AuthScope.ANY_PORT, proxyUser, proxyPass);
-					clientConfig.getState().setProxyCredentials(AuthScope.ANY_REALM, proxyHost, Integer.parseInt(proxyPort), proxyUser, proxyPass);
+					clientConfig.getState().setProxyCredentials(AuthScope.ANY_REALM, proxyHost, proxyPort, proxyUser, proxyPass);
 				}
 			}
 			

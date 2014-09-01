@@ -12,48 +12,37 @@ package ar.com.fernandospr.wns;
  */
 public class WnsProxyProperties {
     
-    private int proxyPort;
-    private String proxyHost;
-    private String proxyUser;
-    private String proxyPass;
+    private String protocol;
+    private String host;
+    private int port;
+    private String user;
+    private String pass;
 
-    public WnsProxyProperties(String proxyUser, String proxyPass, int proxyPort, String proxyHost) {
-        this.proxyUser = proxyUser;
-        this.proxyPass = proxyPass;
-        this.proxyPort = proxyPort;
-        this.proxyHost = proxyHost;
-    }
-    
-
-    public String getProxyUser() {
-        return proxyUser;
+    public WnsProxyProperties(String protocol, String host, int port, String user, String pass) {
+        this.protocol = protocol;
+        this.host = host;
+        this.port = port;
+        this.user = user;
+        this.pass = pass;
     }
 
-    public void setProxyUser(String proxyUser) {
-        this.proxyUser = proxyUser;
+    public String getProtocol() {
+        return protocol;
     }
 
-    public String getProxyPass() {
-        return proxyPass;
+    public String getHost() {
+        return host;
     }
 
-    public void setProxyPass(String proxyPass) {
-        this.proxyPass = proxyPass;
+    public int getPort() {
+        return port;
     }
 
-    public int getProxyPort() {
-        return proxyPort;
+    public String getUser() {
+        return user;
     }
 
-    public void setProxyPort(int proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    public String getProxyHost() {
-        return proxyHost;
-    }
-
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }  
+    public String getPass() {
+        return pass;
+    } 
 }

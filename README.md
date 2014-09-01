@@ -8,7 +8,10 @@ This library will let you implement the Cloud Service of the diagram below:
 
 
 ## Updates
-Version 1.2 is released!
+Working on version 1.3
+
+**1.3 Changes**
+* Proxy support
 
 **1.2 Changes** 
 * Send raw notifications

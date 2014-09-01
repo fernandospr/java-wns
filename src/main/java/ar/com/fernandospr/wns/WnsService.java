@@ -32,6 +32,28 @@ public class WnsService {
 	/**
 	 * @param sid
 	 * @param clientSecret
+	 * @param proxyProperties
+	 */
+	public WnsService(String sid, String clientSecret, WnsProxyProperties proxyProperties) {
+		this(sid,clientSecret,proxyProperties, false);
+	}
+	
+	/**
+	 * @param sid
+	 * @param clientSecret
+	 * @param proxyProperties
+	 * @param logging true if System.out logging is needed
+	 */
+	 public WnsService(String sid, String clientSecret, WnsProxyProperties proxyProperties, boolean logging) {
+		this.client = new WnsClient(sid, clientSecret,proxyProperties, logging);
+		this.xmlResourceBuilder = new WnsXmlResourceBuilder();
+		this.rawResourceBuilder = new WnsRawResourceBuilder();
+	}
+	 
+	 
+	/**
+	 * @param sid
+	 * @param clientSecret
 	 * @param logging true if System.out logging is needed
 	 */
 	public WnsService(String sid, String clientSecret, boolean logging) {

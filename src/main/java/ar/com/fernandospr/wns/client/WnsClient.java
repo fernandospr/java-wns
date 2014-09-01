@@ -75,17 +75,17 @@ public class WnsClient {
 	
 	private static void setProxyCredentials(DefaultApacheHttpClientConfig clientConfig, WnsProxyProperties proxyProps) {
 		if(proxyProps != null) {
-                        String  proxyProtocol   = proxyProps.getProtocol();
-                        String  proxyHost  	= proxyProps.getHost();
-                        int     proxyPort  	= proxyProps.getPort();
-			String  proxyUse	= proxyProps.getUser();
+			String  proxyProtocol   = proxyProps.getProtocol();
+			String  proxyHost  	= proxyProps.getHost();
+			int     proxyPort  	= proxyProps.getPort();
+			String  proxyUser	= proxyProps.getUser();
 			String  proxyPass  	= proxyProps.getPass();
 			
-			if((proxyHost != null) && (!proxyHost.trim().isEmpty())) {
+			if ((proxyHost != null) && (!proxyHost.trim().isEmpty())) {
 				
 				clientConfig.getProperties().put(ApacheHttpClientConfig.PROPERTY_PROXY_URI, proxyProtocol + "://" + proxyHost + ":" + proxyPort);
 				
-				if(!proxyUser.trim().isEmpty()) {
+				if (!proxyUser.trim().isEmpty()) {
 					clientConfig.getProperties().put(ApacheHttpClientConfig.PROPERTY_PREEMPTIVE_AUTHENTICATION, true);
 					clientConfig.getProperties().put(ApacheHttpClientConfig.PROPERTY_INTERACTIVE, true);
 					clientConfig.getState().setCredentials(AuthScope.ANY_REALM, AuthScope.ANY_HOST, AuthScope.ANY_PORT, proxyUser, proxyPass);

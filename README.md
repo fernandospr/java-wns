@@ -8,7 +8,7 @@ This library will let you implement the Cloud Service of the diagram below:
 
 
 ## Updates
-Working on version 1.3
+Version 1.3 released!
 
 **1.3 Changes**
 * Proxy support

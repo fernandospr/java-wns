@@ -105,21 +105,21 @@ service.pushBadge(channelUri, badge);
 Write the following to send a Tile notification:
 ```
 String channelUri = "yourChannelUri";
-WnsTile tile =  new WnsTileBuilder.bindingTemplateTileWideText03("Hello world").build();
+WnsTile tile =  new WnsTileBuilder().bindingTemplateTileWideText03("Hello world").build();
 service.pushTile(channelUri, tile);
 ```
 
 Write the following to send a Toast notification:
 ```
 String channelUri = "yourChannelUri";
-WnsToast toast =  new WnsToastBuilder.bindingTemplateToastText01("Hello world").build();
+WnsToast toast =  new WnsToastBuilder().bindingTemplateToastText01("Hello world").build();
 service.pushToast(channelUri, toast);
 ```
 
 Write the following to send a Raw notification:
 ```
 String channelUri = "yourChannelUri";
-WnsRaw raw =  new WnsRawBuilder.stream("Hello world".getBytes()).build();
+WnsRaw raw =  new WnsRawBuilder().stream("Hello world".getBytes()).build();
 service.pushRaw(channelUri, raw);
 ```
 

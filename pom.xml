@@ -3,7 +3,7 @@
 	<groupId>com.github.fernandospr</groupId>
 	<artifactId>java-wns</artifactId>
 	<packaging>jar</packaging>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.3.1-SNAPSHOT</version>
 	<name>java-wns</name>
 	<description>Library to send notifications using WNS</description>
 	<url>https://github.com/fernandospr/java-wns</url>
@@ -38,28 +38,28 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
+			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
-			<version>1.8</version>
+			<version>2.16</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey.contribs</groupId>
-			<artifactId>jersey-apache-client</artifactId>
-			<version>1.18</version>
+			<groupId>org.glassfish.jersey.connectors</groupId>
+			<artifactId>jersey-apache-connector</artifactId>
+			<version>2.16</version>
 		</dependency>
 		<dependency>
-        		<groupId>org.codehaus.jackson</groupId>
-        		<artifactId>jackson-jaxrs</artifactId>
-        		<version>1.9.11</version>
+        		<groupId>com.fasterxml.jackson.jaxrs</groupId>
+        		<artifactId>jackson-jaxrs-xml-provider</artifactId>
+        		<version>2.5.1</version>
       		</dependency>
       		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
+                <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                <artifactId>jackson-jaxrs-json-provider</artifactId>
+                <version>2.5.1</version>
 		</dependency>
 
 	</dependencies>

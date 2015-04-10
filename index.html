@@ -1,35 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
+    <meta charset="UTF-8">
     <title>Java-wns by fernandospr</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>Java-wns</h1>
-        <h2>Java Service Provider to send push notifications to Windows 8 devices through WNS</h2>
-        <a href="https://github.com/fernandospr/java-wns" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+    <section class="page-header">
+      <h1 class="project-name">Java-wns</h1>
+      <h2 class="project-tagline">Java Service Provider to send push notifications to Windows 8 devices through WNS</h2>
+      <a href="https://github.com/fernandospr/java-wns" class="btn">View on GitHub</a>
+      <a href="https://github.com/fernandospr/java-wns/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/fernandospr/java-wns/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h2>
-<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h2>
+    <section class="main-content">
+      <h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
 
 <p><strong>java-wns</strong> is a Java client for <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh913756.aspx">Windows Push Notification service (WNS)</a>.</p>
 
@@ -38,7 +29,7 @@
 <p><img src="http://i.msdn.microsoft.com/dynimg/IC554245.png"></p>
 
 <h2>
-<a name="updates" class="anchor" href="#updates"><span class="octicon octicon-link"></span></a>Updates</h2>
+<a id="updates" class="anchor" href="#updates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates</h2>
 
 <p>Version 1.2 is released!</p>
 
@@ -46,19 +37,25 @@
 
 <ul>
 <li>Send raw notifications</li>
-</ul><p><strong>1.1 Changes</strong> </p>
+</ul>
+
+<p><strong>1.1 Changes</strong> </p>
 
 <ul>
 <li>Send a notification to multiple channelUris</li>
-</ul><h2>
-<a name="steps" class="anchor" href="#steps"><span class="octicon octicon-link"></span></a>Steps</h2>
+</ul>
+
+<h2>
+<a id="steps" class="anchor" href="#steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Steps</h2>
 
 <ul>
 <li><p><a href="#first-step---registration">First</a>, you will need to register your Windows application in the store to get a SID (Package security identifier) and Client Secret codes.</p></li>
 <li><p><a href="#second-step---obtain-channel-uri">Second</a>, obtain the Channel URI of your devices.</p></li>
 <li><p><a href="#third-step---send-notifications">Third</a>, use this library to authenticate with WNS and send the notifications!</p></li>
-</ul><h3>
-<a name="first-step---registration" class="anchor" href="#first-step---registration"><span class="octicon octicon-link"></span></a>First step - Registration</h3>
+</ul>
+
+<h3>
+<a id="first-step---registration" class="anchor" href="#first-step---registration" aria-hidden="true"><span class="octicon octicon-link"></span></a>First step - Registration</h3>
 
 <p>Go to the <a href="http://go.microsoft.com/fwlink/p/?linkid=234306">Windows Store app development page</a> of the Windows Dev Center and sign in with your Microsoft account.</p>
 
@@ -74,7 +71,7 @@
 <img src="http://i.msdn.microsoft.com/dynimg/IC582761.png"></p>
 
 <h3>
-<a name="second-step---obtain-channel-uri" class="anchor" href="#second-step---obtain-channel-uri"><span class="octicon octicon-link"></span></a>Second step - Obtain Channel URI</h3>
+<a id="second-step---obtain-channel-uri" class="anchor" href="#second-step---obtain-channel-uri" aria-hidden="true"><span class="octicon octicon-link"></span></a>Second step - Obtain Channel URI</h3>
 
 <p>Add the following code to your Windows app:</p>
 
@@ -111,7 +108,7 @@ catch (Exception ex)
 </code></pre>
 
 <h3>
-<a name="third-step---send-notifications" class="anchor" href="#third-step---send-notifications"><span class="octicon octicon-link"></span></a>Third step - Send notifications</h3>
+<a id="third-step---send-notifications" class="anchor" href="#third-step---send-notifications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Third step - Send notifications</h3>
 
 <p>Now with your SID, Client Secret and Channel URI you are ready to send!</p>
 
@@ -152,7 +149,7 @@ service.pushRaw(channelUri, raw);
 </code></pre>
 
 <h2>
-<a name="notification-builders" class="anchor" href="#notification-builders"><span class="octicon octicon-link"></span></a>Notification builders</h2>
+<a id="notification-builders" class="anchor" href="#notification-builders" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notification builders</h2>
 
 <p>To create and customize notifications, you should use the following builders:</p>
 
@@ -161,7 +158,9 @@ service.pushRaw(channelUri, raw);
 <li>WnsToastBuilder</li>
 <li>WnsTileBuilder</li>
 <li>WnsRawBuilder</li>
-</ul><p>WnsToastBuilder and WnsTileBuilder have methods with the following signature:</p>
+</ul>
+
+<p>WnsToastBuilder and WnsTileBuilder have methods with the following signature:</p>
 
 <pre><code>bindingTemplateXXX()
 </code></pre>
@@ -169,19 +168,19 @@ service.pushRaw(channelUri, raw);
 <p>Please check the Toast and Tile templates in the <a href="#links">Links section</a> to use the one you need.</p>
 
 <h2>
-<a name="response-headers" class="anchor" href="#response-headers"><span class="octicon octicon-link"></span></a>Response headers</h2>
+<a id="response-headers" class="anchor" href="#response-headers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response headers</h2>
 
 <p>The pushXXX methods of WnsService return an object of the WnsNotificationResponse type. 
 This object contains the values specified in the Headers (Send notification response section) in the <a href="#links">Links section</a>.</p>
 
 <h2>
-<a name="request-optional-headers" class="anchor" href="#request-optional-headers"><span class="octicon octicon-link"></span></a>Request optional headers</h2>
+<a id="request-optional-headers" class="anchor" href="#request-optional-headers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Request optional headers</h2>
 
 <p>There are pushXXX methods implementations that receive an object of the WnsNotificationRequestOptional type.
 You should create an object of this type and set the corresponding values, according to the Headers (Request parameters) in the <a href="#links">Links Section</a>.</p>
 
 <h2>
-<a name="links" class="anchor" href="#links"><span class="octicon octicon-link"></span></a>Links</h2>
+<a id="links" class="anchor" href="#links" aria-hidden="true"><span class="octicon octicon-link"></span></a>Links</h2>
 
 <p>This library was built based on the following Microsoft documentation:</p>
 
@@ -202,7 +201,7 @@ You should create an object of this type and set the corresponding values, accor
 <p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx">Headers</a></p>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Licensed under the <a href="http://www.opensource.org/licenses/BSD-3-Clause">New 3-Clause BSD License</a>.</p>
 
@@ -235,24 +234,14 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </code></pre>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/fernandospr/java-wns/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/fernandospr/java-wns/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/fernandospr/java-wns">Java-wns</a> is maintained by <a href="https://github.com/fernandospr">fernandospr</a>.</span>
 
-          <p class="repo-owner"><a href="https://github.com/fernandospr/java-wns"></a> is maintained by <a href="https://github.com/fernandospr">fernandospr</a>.</p>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
 
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+    </section>
 
             <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -267,3 +256,4 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   </body>
 </html>
+

@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <title>Java-wns by fernandospr</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Java-wns</h1>
-      <h2 class="project-tagline">Java Service Provider to send push notifications to Windows 8 devices through WNS</h2>
-      <a href="https://github.com/fernandospr/java-wns" class="btn">View on GitHub</a>
-      <a href="https://github.com/fernandospr/java-wns/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/fernandospr/java-wns/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <section class="main-content">
-      <h2>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Java-wns by fernandospr</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Java-wns</h1>
+        <h2>Java Service Provider to send push notifications to Windows 8 devices through WNS</h2>
+        <a href="https://github.com/fernandospr/java-wns" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p><a href="https://pledgie.com/campaigns/26743"><img alt="Click here to lend your support to: Fernando's Open Source Projects and make a donation at pledgie.com !" src="https://pledgie.com/campaigns/26743.png?skin_name=chrome" border="0"></a></p>
+
+<h2>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
 
 <p><strong>java-wns</strong> is a Java client for <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh913756.aspx">Windows Push Notification service (WNS)</a>.</p>
@@ -31,7 +42,13 @@
 <h2>
 <a id="updates" class="anchor" href="#updates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates</h2>
 
-<p>Version 1.2 is released!</p>
+<p>Version 1.3 released!</p>
+
+<p><strong>1.3 Changes</strong></p>
+
+<ul>
+<li>Proxy support</li>
+</ul>
 
 <p><strong>1.2 Changes</strong> </p>
 
@@ -130,21 +147,21 @@ service.pushBadge(channelUri, badge);
 <p>Write the following to send a Tile notification:</p>
 
 <pre><code>String channelUri = "yourChannelUri";
-WnsTile tile =  new WnsTileBuilder.bindingTemplateTileWideText03("Hello world").build();
+WnsTile tile =  new WnsTileBuilder().bindingTemplateTileWideText03("Hello world").build();
 service.pushTile(channelUri, tile);
 </code></pre>
 
 <p>Write the following to send a Toast notification:</p>
 
 <pre><code>String channelUri = "yourChannelUri";
-WnsToast toast =  new WnsToastBuilder.bindingTemplateToastText01("Hello world").build();
+WnsToast toast =  new WnsToastBuilder().bindingTemplateToastText01("Hello world").build();
 service.pushToast(channelUri, toast);
 </code></pre>
 
 <p>Write the following to send a Raw notification:</p>
 
 <pre><code>String channelUri = "yourChannelUri";
-WnsRaw raw =  new WnsRawBuilder.stream("Hello world".getBytes()).build();
+WnsRaw raw =  new WnsRawBuilder().stream("Hello world".getBytes()).build();
 service.pushRaw(channelUri, raw);
 </code></pre>
 
@@ -234,14 +251,24 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </code></pre>
+        </section>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/fernandospr/java-wns">Java-wns</a> is maintained by <a href="https://github.com/fernandospr">fernandospr</a>.</span>
+        <aside id="sidebar">
+          <a href="https://github.com/fernandospr/java-wns/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/fernandospr/java-wns/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+          <p class="repo-owner"><a href="https://github.com/fernandospr/java-wns"></a> is maintained by <a href="https://github.com/fernandospr">fernandospr</a>.</p>
 
-    </section>
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
 
             <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -256,4 +283,3 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   </body>
 </html>
-

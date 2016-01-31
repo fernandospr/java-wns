@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
     <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
           <p><a href="https://pledgie.com/campaigns/26743"><img alt="Click here to lend your support to: Fernando's Open Source Projects and make a donation at pledgie.com !" src="https://pledgie.com/campaigns/26743.png?skin_name=chrome" border="0"></a></p>
 
 <h2>
-<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2>
 
 <p><strong>java-wns</strong> is a Java client for <a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh913756.aspx">Windows Push Notification service (WNS)</a>.</p>
 
@@ -40,9 +40,15 @@
 <p><img src="http://i.msdn.microsoft.com/dynimg/IC554245.png"></p>
 
 <h2>
-<a id="updates" class="anchor" href="#updates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates</h2>
+<a id="updates" class="anchor" href="#updates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Updates</h2>
 
-<p>Version 1.3 released!</p>
+<p>Version 1.3.1 released!</p>
+
+<p><strong>1.3.1 Changes</strong></p>
+
+<ul>
+<li>Jersey client and Jackson dependencies updated</li>
+</ul>
 
 <p><strong>1.3 Changes</strong></p>
 
@@ -63,7 +69,7 @@
 </ul>
 
 <h2>
-<a id="steps" class="anchor" href="#steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Steps</h2>
+<a id="steps" class="anchor" href="#steps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Steps</h2>
 
 <ul>
 <li><p><a href="#first-step---registration">First</a>, you will need to register your Windows application in the store to get a SID (Package security identifier) and Client Secret codes.</p></li>
@@ -72,7 +78,7 @@
 </ul>
 
 <h3>
-<a id="first-step---registration" class="anchor" href="#first-step---registration" aria-hidden="true"><span class="octicon octicon-link"></span></a>First step - Registration</h3>
+<a id="first-step---registration" class="anchor" href="#first-step---registration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>First step - Registration</h3>
 
 <p>Go to the <a href="http://go.microsoft.com/fwlink/p/?linkid=234306">Windows Store app development page</a> of the Windows Dev Center and sign in with your Microsoft account.</p>
 
@@ -88,7 +94,7 @@
 <img src="http://i.msdn.microsoft.com/dynimg/IC582761.png"></p>
 
 <h3>
-<a id="second-step---obtain-channel-uri" class="anchor" href="#second-step---obtain-channel-uri" aria-hidden="true"><span class="octicon octicon-link"></span></a>Second step - Obtain Channel URI</h3>
+<a id="second-step---obtain-channel-uri" class="anchor" href="#second-step---obtain-channel-uri" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Second step - Obtain Channel URI</h3>
 
 <p>Add the following code to your Windows app:</p>
 
@@ -125,7 +131,7 @@ catch (Exception ex)
 </code></pre>
 
 <h3>
-<a id="third-step---send-notifications" class="anchor" href="#third-step---send-notifications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Third step - Send notifications</h3>
+<a id="third-step---send-notifications" class="anchor" href="#third-step---send-notifications" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Third step - Send notifications</h3>
 
 <p>Now with your SID, Client Secret and Channel URI you are ready to send!</p>
 
@@ -166,7 +172,7 @@ service.pushRaw(channelUri, raw);
 </code></pre>
 
 <h2>
-<a id="notification-builders" class="anchor" href="#notification-builders" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notification builders</h2>
+<a id="notification-builders" class="anchor" href="#notification-builders" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notification builders</h2>
 
 <p>To create and customize notifications, you should use the following builders:</p>
 
@@ -185,19 +191,19 @@ service.pushRaw(channelUri, raw);
 <p>Please check the Toast and Tile templates in the <a href="#links">Links section</a> to use the one you need.</p>
 
 <h2>
-<a id="response-headers" class="anchor" href="#response-headers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response headers</h2>
+<a id="response-headers" class="anchor" href="#response-headers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response headers</h2>
 
 <p>The pushXXX methods of WnsService return an object of the WnsNotificationResponse type. 
 This object contains the values specified in the Headers (Send notification response section) in the <a href="#links">Links section</a>.</p>
 
 <h2>
-<a id="request-optional-headers" class="anchor" href="#request-optional-headers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Request optional headers</h2>
+<a id="request-optional-headers" class="anchor" href="#request-optional-headers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request optional headers</h2>
 
 <p>There are pushXXX methods implementations that receive an object of the WnsNotificationRequestOptional type.
 You should create an object of this type and set the corresponding values, according to the Headers (Request parameters) in the <a href="#links">Links Section</a>.</p>
 
 <h2>
-<a id="links" class="anchor" href="#links" aria-hidden="true"><span class="octicon octicon-link"></span></a>Links</h2>
+<a id="links" class="anchor" href="#links" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Links</h2>
 
 <p>This library was built based on the following Microsoft documentation:</p>
 
@@ -218,7 +224,7 @@ You should create an object of this type and set the corresponding values, accor
 <p><a href="http://msdn.microsoft.com/en-us/library/windows/apps/hh465435.aspx">Headers</a></p>
 
 <h2>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 
 <p>Licensed under the <a href="http://www.opensource.org/licenses/BSD-3-Clause">New 3-Clause BSD License</a>.</p>
 

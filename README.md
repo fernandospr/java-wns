@@ -15,7 +15,8 @@ This library will let you implement the Cloud Service of the diagram below:
 
 ~~**1.3.1 Changes**~~
 * ~~Jersey client and Jackson dependencies updated~~
-Note: Currently there is an issue in 1.3.1 where lists of objects are not being serialized correctly to XML, please use older versions until [issue](https://github.com/fernandospr/java-wns/issues/12) is fixed.
+
+<b>Note: Currently there is an issue in 1.3.1 where lists of objects are not being serialized correctly to XML, please use older versions until [issue](https://github.com/fernandospr/java-wns/issues/12) is fixed.</b>
 
 **1.3 Changes**
 * Proxy support

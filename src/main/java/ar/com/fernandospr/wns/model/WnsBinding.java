@@ -1,5 +1,7 @@
 package ar.com.fernandospr.wns.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -29,10 +31,12 @@ public class WnsBinding {
 	
 	@XmlAttribute
 	public Boolean addImageQuery;
-	
+
+	@JacksonXmlElementWrapper(useWrapping=false)
 	@XmlElement(name = "image")
 	public List<WnsImage> images;
-	
+
+	@JacksonXmlElementWrapper(useWrapping=false)
 	@XmlElement(name = "text")
 	public List<WnsText> texts;
 }

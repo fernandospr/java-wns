@@ -26,7 +26,7 @@ public class WnsService {
 	 * @param clientSecret
 	 */
 	public WnsService(String sid, String clientSecret) {
-		this(sid,clientSecret, false);
+		this(sid, clientSecret, false);
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class WnsService {
 	 * @param proxyProperties
 	 */
 	public WnsService(String sid, String clientSecret, WnsProxyProperties proxyProperties) {
-		this(sid,clientSecret,proxyProperties, false);
+		this(sid, clientSecret, proxyProperties, false);
 	}
 	
 	/**
@@ -49,7 +49,6 @@ public class WnsService {
 		this.xmlResourceBuilder = new WnsXmlResourceBuilder();
 		this.rawResourceBuilder = new WnsRawResourceBuilder();
 	}
-	 
 	 
 	/**
 	 * @param sid

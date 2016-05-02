@@ -8,6 +8,7 @@ public final class WnsToastTemplate {
 	public static final String TOASTTEXT02 = "ToastText02";
 	public static final String TOASTTEXT03 = "ToastText03";
 	public static final String TOASTTEXT04 = "ToastText04";
+	public static final String TOASTGENERIC = "ToastGeneric";
 
 	public static final String TOASTIMAGEANDTEXT01 = "ToastImageAndText01";
 	public static final String TOASTIMAGEANDTEXT02 = "ToastImageAndText02";

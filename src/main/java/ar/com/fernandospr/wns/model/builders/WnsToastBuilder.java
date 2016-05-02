@@ -97,6 +97,11 @@ public class WnsToastBuilder extends WnsAbstractBuilder<WnsToastBuilder> {
 					.setBindingTextFields(textField1, textField2, textField3)
 					.setBindingImages(imgSrc1);
 	}
+
+	public WnsToastBuilder bindingTemplateToastGeneric(String textField1, String textField2) {
+		return this.bindingTemplate(WnsToastTemplate.TOASTGENERIC)
+				.setBindingTextFields(textField1, textField2);
+	}
 	
 	/**
 	 * @param audioSrc should be any of {@link ar.com.fernandospr.wns.model.types.WnsToastSoundSource}

@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 
@@ -44,6 +43,10 @@ public class WnsClient {
 		this.sid = sid;
 		this.clientSecret = clientSecret;
 		this.client = createClient(logging, proxyProps);
+	}
+
+	protected String getAuthenticationUri() {
+		return AUTHENTICATION_URI;
 	}
 
     private static Client createClient(boolean logging) {
@@ -100,7 +103,7 @@ public class WnsClient {
      * @throws WnsException when authentication fails
      */
     public void refreshAccessToken() throws WnsException {
-        WebTarget target = client.target(AUTHENTICATION_URI);
+        WebTarget target = client.target(getAuthenticationUri());
 
         MultivaluedStringMap formData = new MultivaluedStringMap();
         formData.add("grant_type", GRANT_TYPE_CLIENT_CREDENTIALS);
@@ -131,7 +134,7 @@ public class WnsClient {
 
         Response response = webResourceBuilder.buildPost(Entity.entity(resourceBuilder.getEntityToSendWithNotification(notification), type)).invoke();
 
-        WnsNotificationResponse notificationResponse = new WnsNotificationResponse(channelUri, response.getStatus(), response.getStringHeaders()    );
+        WnsNotificationResponse notificationResponse = new WnsNotificationResponse(channelUri, response.getStatus(), response.getStringHeaders());
 		if (notificationResponse.code == 200) {
 			return notificationResponse;
 		}

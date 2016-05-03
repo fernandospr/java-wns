@@ -59,6 +59,6 @@ public class WnsTest extends TestCase {
 
         // Verify it reached with the correct XML content
         verify(postRequestedFor(urlEqualTo("/fakechannel"))
-                .withRequestBody(equalToXml("<toast><visual><binding template=\"ToastText02\"><text id=\"1\">a</text><text id=\"2\">b</text></binding></visual><audio/></toast>")));
+                .withRequestBody(equalToXml("<toast><visual><binding template=\"ToastText02\"><text id=\"1\">a</text><text id=\"2\">b</text></binding></visual></toast>")));
     }
 }

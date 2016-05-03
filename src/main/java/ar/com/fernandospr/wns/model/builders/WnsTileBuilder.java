@@ -32,6 +32,11 @@ public class WnsTileBuilder extends WnsAbstractBuilder<WnsTileBuilder> {
 		}
 		return this.tile.visual.binding;
 	}
+
+	public WnsTileBuilder visualContentId(String contentId) {
+		getVisual().contentId = contentId;
+		return this;
+	}
 		
 	public WnsTileBuilder bindingTemplateTileSquareBlock(String textField1, String textField2) {
 		return this.bindingTemplate(WnsTileTemplate.TILESQUAREBLOCK)

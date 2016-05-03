@@ -33,6 +33,6 @@ public class WnsNotificationResponse {
 		this.deviceConnectionStatus = headers.get("X-WNS-DeviceConnectionStatus") != null ? headers.get("X-WNS-DeviceConnectionStatus").get(0) : null;
 		this.errorDescription = headers.get("X-WNS-Error-Description") != null ? headers.get("X-WNS-Error-Description").get(0) : null;
 		this.msgID = headers.get("X-WNS-Msg-ID") != null ? headers.get("X-WNS-Msg-ID").get(0) : null;
-		this.notificationStatus = headers.get("X-WNS-NotificationStatus") != null ? headers.get("X-WNS-NotificationStatus").get(0) : null;
+		this.notificationStatus = headers.get("X-WNS-Status") != null ? headers.get("X-WNS-Status").get(0) : null;
 	}
 }

@@ -104,7 +104,9 @@ public class WnsToastBuilder extends WnsAbstractBuilder<WnsToastBuilder> {
 	}
 	
 	/**
-	 * @param audioSrc should be any of {@link ar.com.fernandospr.wns.model.types.WnsToastSoundSource}
+	 * @param audioSrc should be any of {@link ar.com.fernandospr.wns.model.types.WnsToastSoundSource} or the path
+	 *                 to a local audio file with one of the following prefixes:
+	 *                 <i>ms-appx:///</i> or <i>ms-appdata:///</i>
 	 */
 	public WnsToastBuilder audioSrc(String audioSrc) {
 		getAudio().src = audioSrc;

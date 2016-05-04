@@ -1,9 +1,6 @@
 package ar.com.fernandospr.wns.model.builders;
 
-import ar.com.fernandospr.wns.model.WnsAudio;
-import ar.com.fernandospr.wns.model.WnsBinding;
-import ar.com.fernandospr.wns.model.WnsToast;
-import ar.com.fernandospr.wns.model.WnsVisual;
+import ar.com.fernandospr.wns.model.*;
 import ar.com.fernandospr.wns.model.types.WnsToastTemplate;
 
 public class WnsToastBuilder extends WnsAbstractBuilder<WnsToastBuilder> {
@@ -120,6 +117,31 @@ public class WnsToastBuilder extends WnsAbstractBuilder<WnsToastBuilder> {
 	
 	public WnsToastBuilder audioSilent(Boolean silent) {
 		getAudio().silent = silent;
+		return this;
+	}
+
+	protected WnsToastCommands getCommands(String scenario) {
+		if (this.toast.commands == null || !this.toast.commands.scenario.equals(scenario)) {
+			this.toast.commands = new WnsToastCommands(scenario);
+		}
+		return this.toast.commands;
+	}
+
+	/**
+	 * @param id should be any of {@link ar.com.fernandospr.wns.model.types.WnsToastCommandAlarmType}
+	 * @param arguments optional
+	 */
+	public WnsToastBuilder addAlarmCommand(String id, String arguments) {
+		getCommands("alarm").addCommand(id, arguments);
+		return this;
+	}
+
+	/**
+	 * @param id should be any of {@link ar.com.fernandospr.wns.model.types.WnsToastCommandIncomingCallType}
+	 * @param arguments optional
+	 */
+	public WnsToastBuilder addIncomingCallCommand(String id, String arguments) {
+		getCommands("incomingCall").addCommand(id, arguments);
 		return this;
 	}
 	

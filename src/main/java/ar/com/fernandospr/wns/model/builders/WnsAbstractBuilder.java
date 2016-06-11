@@ -67,7 +67,11 @@ public abstract class WnsAbstractBuilder<T extends WnsAbstractBuilder<T>> {
 		getBinding().addImageQuery = addImageQuery;
 		return getThis();
 	}
-	
+
+	// TODO Support V2/V3 Tile templates
+	// See https://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx#versions
+	// and
+	// https://msdn.microsoft.com/en-us/library/windows/apps/br212854.aspx
 	/**
 	 * @param template 	<p>
 	 * 					For tiles: should be any of {@link ar.com.fernandospr.wns.model.types.WnsTileTemplate}

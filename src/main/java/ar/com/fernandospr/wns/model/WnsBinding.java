@@ -10,7 +10,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * From <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx</a>
+ * For toasts <a href="http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx">http://msdn.microsoft.com/en-us/library/windows/apps/br230843.aspx</a>
+ * <p>
+ * For tiles <a href="https://msdn.microsoft.com/en-us/library/windows/apps/br212854.aspx">https://msdn.microsoft.com/en-us/library/windows/apps/br212854.aspx</a>
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @XmlRootElement(name = "binding")
@@ -41,4 +43,7 @@ public class WnsBinding {
 	@JacksonXmlElementWrapper(useWrapping=false)
 	@XmlElement(name = "text")
 	public List<WnsText> texts;
+
+	@XmlAttribute
+	public String contentId;
 }

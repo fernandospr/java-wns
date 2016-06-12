@@ -11,7 +11,7 @@ This library will let you implement the Cloud Service of the diagram below:
 
 
 ## Updates
-Version 1.4.0 being published to Maven Central!
+Version 1.4.0 released!
 
 * Serialization issue fixed
 * New toast sound sources
@@ -141,6 +141,8 @@ To create and customize notifications, you should use the following builders:
 * WnsBadgeBuilder
 * WnsToastBuilder
 * WnsTileBuilder
+* WnsTileV2Builder
+* WnsTileV3Builder
 * WnsRawBuilder
 
 WnsToastBuilder and WnsTileBuilder have methods with the following signature:

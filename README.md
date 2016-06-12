@@ -11,7 +11,13 @@ This library will let you implement the Cloud Service of the diagram below:
 
 
 ## Updates
-~~Version 1.3.1 released!~~
+Version 1.4.0 being published to Maven Central!
+
+* Serialization issue fixed
+* New toast sound sources
+* Tiles contentId support
+* Toast command support
+* V2/V3 tile templates support --> Using WnsTileV2Builder or WnsTileV3Builder
 
 ~~**1.3.1 Changes**~~
 * ~~Jersey client and Jackson dependencies updated~~

@@ -42,12 +42,12 @@ public class WnsTileBuilder extends WnsAbstractBuilder<WnsTileBuilder> {
 		getBinding().contentId = contentId;
 		return this;
 	}
-		
+
 	public WnsTileBuilder bindingTemplateTileSquareBlock(String textField1, String textField2) {
 		return this.bindingTemplate(WnsTileTemplate.TILESQUAREBLOCK)
 					.setBindingTextFields(textField1, textField2);
 	}
-	
+
 	public WnsTileBuilder bindingTemplateTileSquareText01(String textField1, String textField2, String textField3, String textField4) {
 		return this.bindingTemplate(WnsTileTemplate.TILESQUARETEXT01)
 					.setBindingTextFields(textField1, textField2, textField3, textField4);
@@ -298,7 +298,7 @@ public class WnsTileBuilder extends WnsAbstractBuilder<WnsTileBuilder> {
 				.setBindingTextFields(textField1)
 				.setBindingImages(imgSrc1, imgSrc2);
 	}
-			
+
 	public WnsTile build() {
 		return this.tile;
 	}

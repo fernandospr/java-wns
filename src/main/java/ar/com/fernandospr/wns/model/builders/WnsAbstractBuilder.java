@@ -68,7 +68,6 @@ public abstract class WnsAbstractBuilder<T extends WnsAbstractBuilder<T>> {
 		return getThis();
 	}
 
-	// TODO Support V2/V3 Tile templates
 	// See https://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx#versions
 	// and
 	// https://msdn.microsoft.com/en-us/library/windows/apps/br212854.aspx
@@ -84,7 +83,7 @@ public abstract class WnsAbstractBuilder<T extends WnsAbstractBuilder<T>> {
 		getBinding().images = null;
 		return getThis();
 	}
-	
+
 	protected T setBindingTextFields(String ... textFields) {
 		getBinding().texts = new ArrayList<WnsText>();
 		for (int i = 0; i < textFields.length; i++) {

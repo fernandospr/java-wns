@@ -11,31 +11,23 @@ package ar.com.fernandospr.wns;
  * @author harishankar
  */
 public class WnsProxyProperties {
-    
-    private String protocol;
-    private String host;
-    private int port;
-    private String user;
-    private String pass;
 
-    public WnsProxyProperties(String protocol, String host, int port, String user, String pass) {
-        this.protocol = protocol;
-        this.host = host;
-        this.port = port;
+    private final String uri;
+    private final String user;
+    private final String pass;
+
+    public WnsProxyProperties(String uri, String user, String pass) {
+        this.uri = uri;
         this.user = user;
         this.pass = pass;
     }
 
-    public String getProtocol() {
-        return protocol;
+    public WnsProxyProperties(String protocol, String host, int port, String user, String pass) {
+        this(protocol + "://" + host + ":" + port, user, pass);
     }
 
-    public String getHost() {
-        return host;
-    }
-
-    public int getPort() {
-        return port;
+    public String getUri() {
+        return uri;
     }
 
     public String getUser() {

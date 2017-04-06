@@ -27,22 +27,24 @@ public class WnsClient {
 	private static final String GRANT_TYPE_CLIENT_CREDENTIALS = "client_credentials";
 	private static final String AUTHENTICATION_URI = "https://login.live.com/accesstoken.srf";
 	
-	private String sid;
-	private String clientSecret;
+	private final String sid;
+	private final String clientSecret;
 	private WnsOAuthToken token;
-	private Client client;
-	
-	
-	public WnsClient(String sid, String clientSecret, boolean logging) {
+	private final Client client;
+
+
+	public WnsClient(String sid, String clientSecret, Client client) {
 		this.sid = sid;
 		this.clientSecret = clientSecret;
-		this.client = createClient(logging);
+		this.client = client;
+	}
+
+	public WnsClient(String sid, String clientSecret, boolean logging) {
+		this(sid, clientSecret, createClient(logging));
 	}
 	
 	public WnsClient(String sid, String clientSecret, WnsProxyProperties proxyProps, boolean logging) {
-		this.sid = sid;
-		this.clientSecret = clientSecret;
-		this.client = createClient(logging, proxyProps);
+		this(sid, clientSecret, createClient(logging, proxyProps));
 	}
 
 	protected String getAuthenticationUri() {
@@ -79,22 +81,18 @@ public class WnsClient {
 
     private static void setProxyCredentials(ClientConfig clientConfig, WnsProxyProperties proxyProps) {
         if (proxyProps != null) {
-            String proxyProtocol = proxyProps.getProtocol();
-            String proxyHost = proxyProps.getHost();
-            int proxyPort = proxyProps.getPort();
+            String proxyUri = proxyProps.getUri();
             String proxyUser = proxyProps.getUser();
             String proxyPass = proxyProps.getPass();
 
-            if ((proxyHost != null) && (!proxyHost.trim().isEmpty())) {
-                clientConfig.property(ClientProperties.PROXY_URI, proxyProtocol + "://" + proxyHost + ":" + proxyPort);
-                if (!proxyUser.trim().isEmpty()) {
+            if (proxyUri != null) {
+                clientConfig.property(ClientProperties.PROXY_URI, proxyUri);
+                if ( (proxyUser != null) && !proxyUser.trim().isEmpty()) {
                     clientConfig.property(ClientProperties.PROXY_PASSWORD, proxyPass);
                     clientConfig.property(ClientProperties.PROXY_USERNAME, proxyUser);
                 }
             }
-
         }
-
     }
 
     /**

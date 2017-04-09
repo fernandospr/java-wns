@@ -23,15 +23,16 @@ import org.glassfish.jersey.internal.util.collection.MultivaluedStringMap;
 
 
 public class WnsClient {
+    
 	private static final String SCOPE = "notify.windows.com";
 	private static final String GRANT_TYPE_CLIENT_CREDENTIALS = "client_credentials";
 	private static final String AUTHENTICATION_URI = "https://login.live.com/accesstoken.srf";
 	
 	private final String sid;
 	private final String clientSecret;
-	private WnsOAuthToken token;
 	private final Client client;
 
+	private WnsOAuthToken token;
 
 	public WnsClient(String sid, String clientSecret, Client client) {
 		this.sid = sid;
@@ -40,7 +41,7 @@ public class WnsClient {
 	}
 
 	public WnsClient(String sid, String clientSecret, boolean logging) {
-		this(sid, clientSecret, createClient(logging));
+		this(sid, clientSecret, null, logging);
 	}
 	
 	public WnsClient(String sid, String clientSecret, WnsProxyProperties proxyProps, boolean logging) {
@@ -51,22 +52,9 @@ public class WnsClient {
 		return AUTHENTICATION_URI;
 	}
 
-    private static Client createClient(boolean logging) {
-        ClientConfig clientConfig = new ClientConfig(JacksonJaxbXMLProvider.class, JacksonJsonProvider.class);
-        Client client = ClientBuilder.newClient(clientConfig);
-
-        if (logging) {
-            LoggingFilter loggingFilter = new LoggingFilter(
-                    Logger.getLogger(WnsClient.class.getName()), true);
-
-            client = client.register(loggingFilter);
-        }
-        return client;
-    }
-
     private static Client createClient(boolean logging, WnsProxyProperties proxyProps) {
-        ClientConfig clientConfig = new ClientConfig(JacksonJaxbXMLProvider.class, JacksonJsonProvider.class)
-                .connectorProvider(new ApacheConnectorProvider());
+        ClientConfig clientConfig = new ClientConfig(JacksonJaxbXMLProvider.class, JacksonJsonProvider.class);
+
         setProxyCredentials(clientConfig, proxyProps);
 
         Client client = ClientBuilder.newClient(clientConfig);
@@ -88,8 +76,8 @@ public class WnsClient {
             if (proxyUri != null) {
                 clientConfig.property(ClientProperties.PROXY_URI, proxyUri);
                 if ( (proxyUser != null) && !proxyUser.trim().isEmpty()) {
-                    clientConfig.property(ClientProperties.PROXY_PASSWORD, proxyPass);
                     clientConfig.property(ClientProperties.PROXY_USERNAME, proxyUser);
+                    clientConfig.property(ClientProperties.PROXY_PASSWORD, proxyPass);
                 }
             }
         }

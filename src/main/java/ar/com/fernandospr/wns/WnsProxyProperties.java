@@ -22,6 +22,7 @@ public class WnsProxyProperties {
         this.pass = pass;
     }
 
+    @Deprecated
     public WnsProxyProperties(String protocol, String host, int port, String user, String pass) {
         this(protocol + "://" + host + ":" + port, user, pass);
     }

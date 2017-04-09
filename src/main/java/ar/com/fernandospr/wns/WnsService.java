@@ -17,16 +17,25 @@ import ar.com.fernandospr.wns.model.WnsToast;
 public class WnsService {	
 	private int retryPolicy = 5; // By default retry 5 times
 	
-	private WnsClient client;
+	private final WnsClient client;
 	private WnsResourceBuilder xmlResourceBuilder;
 	private WnsResourceBuilder rawResourceBuilder;
-	
-	/**
+
+    /**
+     * @param client
+     */
+    public WnsService(WnsClient client) {
+        this.client = client;
+        this.xmlResourceBuilder = new WnsXmlResourceBuilder();
+        this.rawResourceBuilder = new WnsRawResourceBuilder();
+    }
+
+    /**
 	 * @param sid
 	 * @param clientSecret
 	 */
 	public WnsService(String sid, String clientSecret) {
-		this(sid, clientSecret, false);
+		this(sid, clientSecret, null, false);
 	}
 	
 	/**
@@ -45,22 +54,18 @@ public class WnsService {
 	 * @param logging true if System.out logging is needed
 	 */
 	 public WnsService(String sid, String clientSecret, WnsProxyProperties proxyProperties, boolean logging) {
-		this.client = new WnsClient(sid, clientSecret,proxyProperties, logging);
-		this.xmlResourceBuilder = new WnsXmlResourceBuilder();
-		this.rawResourceBuilder = new WnsRawResourceBuilder();
+		this(new WnsClient(sid, clientSecret, proxyProperties, logging));
 	}
-	 
+
 	/**
 	 * @param sid
 	 * @param clientSecret
 	 * @param logging true if System.out logging is needed
 	 */
 	public WnsService(String sid, String clientSecret, boolean logging) {
-		this.client = new WnsClient(sid, clientSecret, logging);
-		this.xmlResourceBuilder = new WnsXmlResourceBuilder();
-		this.rawResourceBuilder = new WnsRawResourceBuilder();
+		this(sid, clientSecret, null, logging);
 	}
-	
+
 	/**
 	 * Pushes a tile to channelUri
 	 * @param channelUri
